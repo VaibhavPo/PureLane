@@ -421,5 +421,20 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+    {%- if template.name == 'index' -%}
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          function revealAll() {
+            var revs = document.querySelectorAll('.rv');
+            for (var i = 0; i < revs.length; i++) {
+              revs[i].classList.add('in');
+            }
+          }
+          setTimeout(revealAll, 800);
+          window.addEventListener('scroll', revealAll, { once: true, passive: true });
+        });
+      </script>
+    {%- endif -%}
   </body>
 </html>

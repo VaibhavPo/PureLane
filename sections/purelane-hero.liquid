@@ -2,7 +2,7 @@
   Purelane Hero Section
 {%- endcomment -%}
 
-<section class="hero" data-scene="1" {{ section.shopify_attributes }}>
+<section class="hero" id="top" data-scene="1" {{ section.shopify_attributes }}>
   <div class="hero-grid">
 
     {%- if section.settings.show_badges -%}
@@ -31,7 +31,7 @@
       <h1 class="d1 rv in">
         {{ section.settings.heading | replace: '[', '<span class="lime">' | replace: ']', '</span>' }}
       </h1>
-      <div class="rule rv rv-d1">
+      <div class="rule rv in rv-d1">
         <i></i>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/>
@@ -39,8 +39,8 @@
         </svg>
         <i></i>
       </div>
-      <p class="lede rv rv-d2">{{ section.settings.subheading }}</p>
-      <div class="hero-cta rv rv-d3">
+      <p class="lede rv in rv-d2">{{ section.settings.subheading }}</p>
+      <div class="hero-cta rv in rv-d3">
         <a class="btn btn-primary" href="{{ section.settings.button_1_link | default: '#shop' }}">
           {{ section.settings.button_1_text }}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -53,7 +53,7 @@
       </div>
 
       {%- if section.settings.show_badges -%}
-        <div class="badgestrip rv rv-d4">
+        <div class="badgestrip rv in rv-d4">
           {%- for block in section.blocks -%}
             {%- if block.type == 'badge' -%}
               <div class="glass-2">

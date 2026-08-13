@@ -8,7 +8,7 @@
       {%- for block in section.blocks -%}
         {%- if block.type == 'ticker_item' -%}
           <span>{{ block.settings.text }} {% if block.settings.highlight_text != blank %}<b>{{ block.settings.highlight_text }}</b>{% endif %}</span>
-        {%- endif -%}-
+        {%- endif -%}
       {%- endfor -%}
       {%- comment -%}Repeat for infinite scroll effect{%- endcomment -%}
       {%- for block in section.blocks -%}
@@ -83,6 +83,16 @@
     </div>
   </div>
 </header>
+
+<nav class="rail" aria-label="Section progress">
+  <a href="#top" class="on" aria-label="Hero"></a>
+  <a href="#ingredients" aria-label="Ingredients"></a>
+  <a href="#how" aria-label="How it works"></a>
+  <a href="#proof" aria-label="Proof"></a>
+  <a href="#bundles" aria-label="Bundles"></a>
+  <a href="#shop" aria-label="Shop"></a>
+  <a href="#reviews" aria-label="Reviews"></a>
+</nav>
 
 <style>
 /* Mobile active menu tweak */

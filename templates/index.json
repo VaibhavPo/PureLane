@@ -8,7 +8,71 @@
         "button_1_text": "Shop now",
         "button_2_text": "How it works",
         "show_badges": true
-      }
+      },
+      "blocks": {
+        "badge_1": {
+          "type": "badge",
+          "settings": {
+            "text": "Plant<br>powered",
+            "custom_icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z\"/><path d=\"M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z\"/></svg>"
+          }
+        },
+        "badge_2": {
+          "type": "badge",
+          "settings": {
+            "text": "Safe for<br>kids &amp; pets",
+            "custom_icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3 4.5 6v6.2c0 4.3 3.1 7.6 7.5 8.8 4.4-1.2 7.5-4.5 7.5-8.8V6L12 3Z\"/><path d=\"m9 12 2.2 2.2L15.4 10\"/></svg>"
+          }
+        },
+        "badge_3": {
+          "type": "badge",
+          "settings": {
+            "text": "Zero harsh<br>chemicals",
+            "custom_icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"8.4\"/><path d=\"M6.4 17.6 17.6 6.4\"/></svg>"
+          }
+        },
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "image_1_class": "p-kbtl",
+            "price_label": "Single bottle",
+            "price": "₹200",
+            "compare_at_price": "₹299",
+            "discount_tag": "33% off"
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "image_1_class": "p-tbtl",
+            "image_2_class": "p-kbtl",
+            "price_label": "Any 2 products",
+            "price": "₹349",
+            "compare_at_price": "₹598",
+            "discount_tag": "Save ₹249"
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "image_1_class": "p-tbtl",
+            "image_2_class": "p-mbtl",
+            "image_3_class": "p-kbtl",
+            "price_label": "Any 3 products",
+            "price": "₹499",
+            "compare_at_price": "₹897",
+            "discount_tag": "Save ₹398"
+          }
+        }
+      },
+      "block_order": [
+        "badge_1",
+        "badge_2",
+        "badge_3",
+        "slide_1",
+        "slide_2",
+        "slide_3"
+      ]
     },
     "purelane_reviews_rail": {
       "type": "purelane-reviews-rail",
@@ -17,17 +81,151 @@
         "rating_score": "4.8",
         "reviews_count": "from 8,000+ reviews",
         "homes_loved": "Loved by 12 lakh+ homes"
-      }
+      },
+      "blocks": {
+        "rev_1": {
+          "type": "review",
+          "settings": {
+            "title": "Works like a charm",
+            "content": "Finally an eco option that cleans as well as the chemical detergent I used for years, and it smells better.",
+            "author": "Anita",
+            "product_purchased": "Laundry detergent"
+          }
+        },
+        "rev_2": {
+          "type": "review",
+          "settings": {
+            "title": "Best dishwash ever",
+            "content": "Our old dishwash left my help with dry, cracked skin. That stopped completely after we switched.",
+            "author": "Priya",
+            "product_purchased": "Dishwash gel"
+          }
+        },
+        "rev_3": {
+          "type": "review",
+          "settings": {
+            "title": "Great product, great packaging",
+            "content": "Very soft on hands with a lovely fragrance, and it feels good to be using far less plastic.",
+            "author": "Sunita",
+            "product_purchased": "Liquid handwash"
+          }
+        },
+        "rev_4": {
+          "type": "review",
+          "settings": {
+            "title": "Dog friendly",
+            "content": "We switched because chemical floor cleaners were setting off my dog's allergies. No reactions since.",
+            "author": "Rohit S.",
+            "product_purchased": "Floor cleaner"
+          }
+        },
+        "rev_5": {
+          "type": "review",
+          "settings": {
+            "title": "Sparkling taps again",
+            "content": "Hard water had ruined our bathroom fittings. Two sprays and the scale wipes straight off, no scrubbing.",
+            "author": "Verified buyer",
+            "product_purchased": "Tap cleaner"
+          }
+        }
+      },
+      "block_order": [
+        "rev_1",
+        "rev_2",
+        "rev_3",
+        "rev_4",
+        "rev_5"
+      ]
     },
     "purelane_ingredients": {
       "type": "purelane-ingredients",
       "settings": {
         "heading": "Sourced from nature"
-      }
+      },
+      "blocks": {
+        "ing_1": {
+          "type": "ingredient",
+          "settings": {
+            "illustration": "coconut",
+            "title": "Coconut",
+            "description": "Plant-derived cleansers that lift grease"
+          }
+        },
+        "ing_2": {
+          "type": "ingredient",
+          "settings": {
+            "illustration": "orange",
+            "title": "Orange peel",
+            "description": "Natural degreaser and fresh citrus lift"
+          }
+        },
+        "ing_3": {
+          "type": "ingredient",
+          "settings": {
+            "illustration": "soapnut",
+            "title": "Soap nut",
+            "description": "A traditional plant foaming agent"
+          }
+        },
+        "ing_4": {
+          "type": "ingredient",
+          "settings": {
+            "illustration": "neem",
+            "title": "Neem",
+            "description": "Time-tested antibacterial from the tree"
+          }
+        },
+        "ing_5": {
+          "type": "ingredient",
+          "settings": {
+            "illustration": "lemongrass",
+            "title": "Lemongrass",
+            "description": "Clean fragrance with nothing synthetic"
+          }
+        }
+      },
+      "block_order": [
+        "ing_1",
+        "ing_2",
+        "ing_3",
+        "ing_4",
+        "ing_5"
+      ]
     },
     "purelane_pillars": {
       "type": "purelane-pillars",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "pil_1": {
+          "type": "pillar",
+          "settings": {
+            "title": "Less scrubbing",
+            "content": "A foaming formulation. The foam clings to grease and lifts it, so you wipe instead of scrub.",
+            "custom_icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"8\" cy=\"8.5\" r=\"3.2\"/><circle cx=\"16.4\" cy=\"6.6\" r=\"2.2\"/><circle cx=\"15\" cy=\"13\" r=\"2.8\"/><circle cx=\"8.6\" cy=\"15.6\" r=\"2.1\"/><path d=\"M4 21h16\"/></svg>"
+          }
+        },
+        "pil_2": {
+          "type": "pillar",
+          "settings": {
+            "title": "Clean ingredients",
+            "content": "No sulphates, no chlorine, no synthetic fragrance. Nothing on the label you would not want near your food.",
+            "custom_icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3 4.5 6v6.2c0 4.3 3.1 7.6 7.5 8.8 4.4-1.2 7.5-4.5 7.5-8.8V6L12 3Z\"/><path d=\"m9 12 2.2 2.2L15.4 10\"/></svg>"
+          }
+        },
+        "pil_3": {
+          "type": "pillar",
+          "settings": {
+            "title": "Safe around everyone",
+            "content": "Gentle on hands, safe around kids and pets, and it leaves no toxic residue on the surfaces you touch every day.",
+            "custom_icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 20s-7-4.4-7-9.4A4.1 4.1 0 0 1 12 8a4.1 4.1 0 0 1 7 2.6c0 5-7 9.4-7 9.4Z\"/></svg>"
+          }
+        }
+      },
+      "block_order": [
+        "pil_1",
+        "pil_2",
+        "pil_3"
+      ]
     },
     "purelane_proof": {
       "type": "purelane-proof",
@@ -36,7 +234,101 @@
         "heading": "Tough on grime.\nGentle on everything else.",
         "description": "Every formula is built on plant-derived cleansers and essential oils. It behaves exactly like the cleaner you are used to, minus the things you never signed up for.",
         "button_text": "See the ingredient list"
-      }
+      },
+      "blocks": {
+        "rot_1": {
+          "type": "rotator_slide",
+          "settings": {
+            "image_class": "p-kitchen",
+            "product_name": "Kitchen cleaner",
+            "product_description": "Foam lifts grease, no scrubbing"
+          }
+        },
+        "rot_2": {
+          "type": "rotator_slide",
+          "settings": {
+            "image_class": "p-tap",
+            "product_name": "Tap & limescale",
+            "product_description": "Melts hard water stains"
+          }
+        },
+        "rot_3": {
+          "type": "rotator_slide",
+          "settings": {
+            "image_class": "p-laundry",
+            "product_name": "Laundry detergent",
+            "product_description": "Tough on odour, soft on fabric"
+          }
+        },
+        "rot_4": {
+          "type": "rotator_slide",
+          "settings": {
+            "image_class": "p-toilet",
+            "product_name": "Toilet cleaner",
+            "product_description": "Kills 99.9% of germs"
+          }
+        },
+        "rot_5": {
+          "type": "rotator_slide",
+          "settings": {
+            "image_class": "p-floor",
+            "product_name": "Floor cleaner",
+            "product_description": "Neem powered, pet safe"
+          }
+        },
+        "rot_6": {
+          "type": "rotator_slide",
+          "settings": {
+            "image_class": "p-dish",
+            "product_name": "Dishwash gel",
+            "product_description": "Cuts grease, kind to hands"
+          }
+        },
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "value": "99.9%",
+            "label": "Germ kill",
+            "desc": "Tested against germs and bacteria"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "value": "0%",
+            "label": "Sulphates",
+            "desc": "No SLS, chlorine or parabens"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "value": "100%",
+            "label": "Plant based",
+            "desc": "Cleansers derived from plants"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "value": "4.8",
+            "label": "Rated",
+            "desc": "Across 8,000+ verified reviews"
+          }
+        }
+      },
+      "block_order": [
+        "rot_1",
+        "rot_2",
+        "rot_3",
+        "rot_4",
+        "rot_5",
+        "rot_6",
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4"
+      ]
     },
     "purelane_combos": {
       "type": "purelane-combos",
@@ -44,7 +336,65 @@
         "kicker": "Pre-built to save you money",
         "heading": "Best selling combos",
         "subheading": "Swipe through the boxes people order most. Each one is already priced below buying the same products on their own."
-      }
+      },
+      "blocks": {
+        "combo_1": {
+          "type": "combo",
+          "settings": {
+            "title": "Kitchen essentials",
+            "savings_tag": "You save ₹398",
+            "flag_tag": "Most popular",
+            "item_1_img_class": "p-kitchen",
+            "item_1_title": "Cuts grease instantly",
+            "item_2_img_class": "p-dish",
+            "item_2_title": "Squeaky clean dishes",
+            "item_3_img_class": "p-tap",
+            "item_3_title": "Melts hard water stains",
+            "price": "₹499",
+            "compare_at_price": "₹897",
+            "save_text": "Save ₹398"
+          }
+        },
+        "combo_2": {
+          "type": "combo",
+          "settings": {
+            "title": "Laundry care bundle",
+            "savings_tag": "You save ₹448",
+            "item_1_img_class": "p-laundry",
+            "item_1_title": "Removes tough stains & odour",
+            "item_2_img_class": "p-wm",
+            "item_2_title": "Deep-cleans your machine",
+            "price": "₹499",
+            "compare_at_price": "₹947",
+            "save_text": "Save ₹448"
+          }
+        },
+        "combo_3": {
+          "type": "combo",
+          "settings": {
+            "is_hero": true,
+            "title": "Complete home bundle",
+            "product_count_label": "5 products",
+            "savings_tag": "Biggest saving",
+            "flag_tag": "Best value",
+            "item_1_img_class": "p-kitchen",
+            "item_1_title": "Cuts grease instantly",
+            "item_2_img_class": "p-floor",
+            "item_2_title": "Kills 99.9% germs",
+            "item_3_img_class": "p-handwash",
+            "item_3_title": "Gentle hydration for hands",
+            "includes_text": "Includes: Kitchen Cleaner, Laundry Detergent, Floor Cleaner, Toilet Cleaner & Handwash. Our biggest saving box.",
+            "price": "₹799",
+            "compare_at_price": "₹1,495",
+            "save_text": "Save ₹696"
+          }
+        }
+      },
+      "block_order": [
+        "combo_1",
+        "combo_2",
+        "combo_3"
+      ]
     },
     "purelane_bundles": {
       "type": "purelane-bundles",
@@ -52,14 +402,129 @@
         "kicker": "Build your bundle",
         "heading": "One box. Every room.",
         "subheading": "Mix and match across kitchen, laundry, home and skin. One flat price, no code needed, free shipping either way."
-      }
+      },
+      "blocks": {
+        "tier_1": {
+          "type": "tier",
+          "settings": {
+            "tag_text": "Starter",
+            "quantity": "2",
+            "price": "₹349",
+            "compare_at_price": "₹598",
+            "price_note": "Flat ₹174 per product",
+            "bullet_1": "Pick any two products",
+            "bullet_2": "Free shipping across India",
+            "image_1_class": "p-combo2"
+          }
+        },
+        "tier_2": {
+          "type": "tier",
+          "settings": {
+            "is_featured": true,
+            "tag_text": "Most popular",
+            "quantity": "3",
+            "price": "₹499",
+            "compare_at_price": "₹897",
+            "price_note": "Flat ₹166 per product",
+            "bullet_1": "Pick any three products",
+            "bullet_2": "Covers kitchen and laundry",
+            "bullet_3": "Free shipping across India",
+            "image_1_class": "p-kitchen",
+            "image_2_class": "p-tap",
+            "image_3_class": "p-dish"
+          }
+        },
+        "tier_3": {
+          "type": "tier",
+          "settings": {
+            "tag_text": "Whole home",
+            "quantity": "5",
+            "price": "₹799",
+            "compare_at_price": "₹1495",
+            "price_note": "Flat ₹160 per product",
+            "bullet_1": "Pick any five products",
+            "bullet_2": "Every room in one order",
+            "bullet_3": "Free shipping across India",
+            "image_1_class": "p-kitchen",
+            "image_2_class": "p-tap",
+            "image_3_class": "p-floor",
+            "image_4_class": "p-toilet",
+            "image_5_class": "p-laundry"
+          }
+        }
+      },
+      "block_order": [
+        "tier_1",
+        "tier_2",
+        "tier_3"
+      ]
     },
     "purelane_shop": {
       "type": "purelane-shop",
       "settings": {
         "kicker": "Bestsellers",
         "heading": "Loved by 30,000 homes"
-      }
+      },
+      "blocks": {
+        "prod_1": {
+          "type": "product_card",
+          "settings": {
+            "badge_text": "Best seller",
+            "image_class": "p-tap",
+            "title": "Tap cleaner & limescale remover",
+            "rating": "4.8",
+            "review_count": "237",
+            "price": "₹200",
+            "compare_at_price": "₹299",
+            "discount_tag": "33% off"
+          }
+        },
+        "prod_2": {
+          "type": "product_card",
+          "settings": {
+            "badge_text": "Best seller",
+            "image_class": "p-kitchen",
+            "title": "Kitchen cleaner, foaming",
+            "rating": "4.8",
+            "review_count": "254",
+            "price": "₹200",
+            "compare_at_price": "₹299",
+            "discount_tag": "33% off"
+          }
+        },
+        "prod_3": {
+          "type": "product_card",
+          "settings": {
+            "badge_text": "Top rated",
+            "image_class": "p-metal",
+            "title": "Copper, bronze & brass cleaner",
+            "rating": "4.8",
+            "review_count": "231",
+            "price": "₹200",
+            "compare_at_price": "₹299",
+            "discount_tag": "33% off"
+          }
+        },
+        "prod_4": {
+          "type": "product_card",
+          "settings": {
+            "badge_text": "New",
+            "image_class": "p-wm",
+            "title": "Washing machine cleaner & descaler",
+            "rating": "4.8",
+            "review_count": "183",
+            "price": "₹200",
+            "compare_at_price": "₹299",
+            "discount_tag": "33% off"
+          }
+        }
+      },
+      "block_order": [
+        "prod_1",
+        "prod_2",
+        "prod_3",
+        "prod_4"
+      ]
     },
     "purelane_full_range": {
       "type": "purelane-full-range",
@@ -67,25 +532,165 @@
         "kicker": "The full range",
         "heading": "Every room, one shelf",
         "subheading": "Floors, taps, kitchen, laundry, bathroom and hands. Fourteen plant-based formulas that replace every harsh bottle under your sink."
-      }
+      },
+      "blocks": {
+        "item_1": { "type": "range_item", "settings": { "image_class": "p-floor", "title": "Floor cleaner" } },
+        "item_2": { "type": "range_item", "settings": { "image_class": "p-tap", "title": "Tap cleaner" } },
+        "item_3": { "type": "range_item", "settings": { "image_class": "p-kitchen", "title": "Kitchen cleaner" } },
+        "item_4": { "type": "range_item", "settings": { "image_class": "p-toilet", "title": "Toilet cleaner" } },
+        "item_5": { "type": "range_item", "settings": { "image_class": "p-laundry", "title": "Laundry detergent" } },
+        "item_6": { "type": "range_item", "settings": { "image_class": "p-dish", "title": "Dishwash gel" } },
+        "item_7": { "type": "range_item", "settings": { "image_class": "p-metal", "title": "Copper & brass cleaner" } },
+        "item_8": { "type": "range_item", "settings": { "image_class": "p-wm", "title": "Machine descaler" } },
+        "item_9": { "type": "range_item", "settings": { "image_class": "p-handwash", "title": "Handwash" } },
+        "item_10": { "type": "range_item", "settings": { "image_class": "p-eraser", "title": "Magic eraser" } }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5",
+        "item_6",
+        "item_7",
+        "item_8",
+        "item_9",
+        "item_10"
+      ]
     },
     "purelane_why_bundles": {
       "type": "purelane-why-bundles",
       "settings": {
         "kicker": "The smarter way to shop",
         "heading": "Why bundles beat buying single"
-      }
+      },
+      "blocks": {
+        "ben_1": {
+          "type": "benefit",
+          "settings": {
+            "title": "Save up to 45%",
+            "description": "Versus buying the same products separately",
+            "custom_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3v18\"/><path d=\"M16.5 7.2C15.6 6 14 5.4 12 5.4c-2.4 0-4 1.1-4 2.9 0 2 1.7 2.7 4.2 3.3 2.7.6 4.3 1.4 4.3 3.4 0 1.9-1.7 3.1-4.5 3.1-2.2 0-3.8-.7-4.8-2\"/></svg>"
+          }
+        },
+        "ben_2": {
+          "type": "benefit",
+          "settings": {
+            "title": "One flat price",
+            "description": "No calculators, no comparing carts",
+            "custom_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3.4\"/><path d=\"m8.4 12.2 2.4 2.4 4.8-5\"/></svg>"
+          }
+        },
+        "ben_3": {
+          "type": "benefit",
+          "settings": {
+            "title": "Curated by experts",
+            "description": "Products picked to work well together",
+            "custom_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.6 9.7l5.8-.8Z\"/></svg>"
+          }
+        },
+        "ben_4": {
+          "type": "benefit",
+          "settings": {
+            "title": "Free shipping always",
+            "description": "Included on every bundle, all India",
+            "custom_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M2.6 16.4V7.2h10.2v9.2\"/><path d=\"M12.8 10.4h4l3.6 3.2v2.8h-7.6\"/><circle cx=\"6.6\" cy=\"18\" r=\"1.9\"/><circle cx=\"16.6\" cy=\"18\" r=\"1.9\"/></svg>"
+          }
+        }
+      },
+      "block_order": [
+        "ben_1",
+        "ben_2",
+        "ben_3",
+        "ben_4"
+      ]
     },
     "purelane_categories": {
       "type": "purelane-categories",
       "settings": {
         "kicker": "Bundle categories",
         "heading": "Find the right bundle for you"
-      }
+      },
+      "blocks": {
+        "cat_1": {
+          "type": "category_card",
+          "settings": {
+            "image_class": "p-kitchen",
+            "title": "Kitchen bundle",
+            "subtitle": "Grease, dishes & more"
+          }
+        },
+        "cat_2": {
+          "type": "category_card",
+          "settings": {
+            "image_class": "p-toilet",
+            "title": "Bathroom bundle",
+            "subtitle": "Deep clean & disinfect"
+          }
+        },
+        "cat_3": {
+          "type": "category_card",
+          "settings": {
+            "image_class": "p-laundry",
+            "title": "Laundry bundle",
+            "subtitle": "Softer, fresher wash"
+          }
+        },
+        "cat_4": {
+          "type": "category_card",
+          "settings": {
+            "image_class": "p-tap",
+            "title": "Hard water bundle",
+            "subtitle": "Melt away limescale"
+          }
+        }
+      },
+      "block_order": [
+        "cat_1",
+        "cat_2",
+        "cat_3",
+        "cat_4"
+      ]
     },
     "purelane_trust_bar": {
       "type": "purelane-trust-bar",
-      "settings": {}
+      "settings": {},
+      "blocks": {
+        "trust_1": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Plant derived<br>formulas",
+            "custom_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z\"/><path d=\"M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z\"/></svg>"
+          }
+        },
+        "trust_2": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Recyclable<br>packaging",
+            "custom_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 8h16v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z\"/><path d=\"M4 8 6.5 3h11L20 8M9.5 12h5\"/></svg>"
+          }
+        },
+        "trust_3": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Safe for<br>kids &amp; pets",
+            "custom_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 20s-7-4.4-7-9.4A4.1 4.1 0 0 1 12 8a4.1 4.1 0 0 1 7 2.6c0 5-7 9.4-7 9.4Z\"/></svg>"
+          }
+        },
+        "trust_4": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Made in<br>India",
+            "custom_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"8.6\"/><path d=\"M3.4 12h17.2M12 3.4c2.4 2.4 3.6 5.4 3.6 8.6S14.4 18.2 12 20.6c-2.4-2.4-3.6-5.4-3.6-8.6S9.6 5.8 12 3.4Z\"/></svg>"
+          }
+        }
+      },
+      "block_order": [
+        "trust_1",
+        "trust_2",
+        "trust_3",
+        "trust_4"
+      ]
     },
     "purelane_signup": {
       "type": "purelane-signup",

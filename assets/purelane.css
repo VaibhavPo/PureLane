@@ -22,14 +22,25 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html {
+  height: auto;
+  min-height: 100%;
+}
 body.template-index{
   font-family:'Inter',system-ui,-apple-system,sans-serif;
-  background:var(--ink);
-  color:var(--paper);
+  background:var(--ink) !important;
+  color:var(--paper) !important;
   line-height:1.62;
   -webkit-font-smoothing:antialiased;
-  overflow-x:clip;
+  overflow-x:hidden;
+  overflow-y:visible;
   padding-bottom:74px;
+  height:auto;
+  min-height:100vh;
+}
+body.template-index #MainContent,
+body.template-index .shopify-section {
+  background: transparent !important;
 }
 @media(min-width:960px){body{padding-bottom:0}}
 img,svg{display:block;max-width:100%}
@@ -276,7 +287,7 @@ header.up{top:10px}
 .hslide{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:flex-end;
   padding-right:2%;opacity:0;pointer-events:none;transition:opacity .85s var(--ease)}
 .hslide.on{opacity:1}
-.hp{position:relative;width:auto;flex:0 0 auto;
+.hp{display:block;position:relative;width:auto;flex:0 0 auto;
   background-repeat:no-repeat;background-position:center bottom;background-size:contain;
   opacity:0;transform:translateY(28px) scale(.94);
   transition:opacity .8s var(--ease),transform .8s var(--ease);
@@ -646,11 +657,11 @@ footer{position:relative;z-index:2;margin-top:var(--sec-y);padding:44px 0 30px;b
 body.template-index{background:var(--ink)}
 
 /* ---------- scenes: sunlit shallow water ---------- */
-.scenes{background:#eee7fb}
-.s1{background:linear-gradient(178deg,#fbfffb 0%,#eafaec 24%,#d6f1dc 54%,#bfe8ca 100%)}
-.s2{background:linear-gradient(178deg,#f6fdf7 0%,#e3f7e7 26%,#cbedd4 58%,#b2e2c2 100%)}
-.s3{background:linear-gradient(178deg,#f0fbf2 0%,#d9f2df 28%,#bde6c8 60%,#a2d9b6 100%)}
-.s4{background:linear-gradient(178deg,#e9f8ec 0%,#cdedd6 30%,#addcbe 62%,#8ecdaa 100%)}
+.scenes{background:#b7dfc8}
+.s1{background:linear-gradient(180deg,#effaf3 0%,#e7f7ec 24%,#d8f0df 54%,#b8dfc8 100%)}
+.s2{background:linear-gradient(180deg,#edf9f2 0%,#e0f3e6 28%,#cce9d5 58%,#b1dbbf 100%)}
+.s3{background:linear-gradient(180deg,#e9f7ee 0%,#d9efdf 30%,#bee2cc 60%,#a5d3b6 100%)}
+.s4{background:linear-gradient(180deg,#e4f4e9 0%,#cde8d6 32%,#acdbbd 62%,#91cba9 100%)}
 
 /* ---------- water: white light on a light ground ---------- */
 .wl-a{mix-blend-mode:soft-light;opacity:1}
@@ -808,5 +819,3 @@ footer{background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(214,241,221,
 .rbar .tr i{background:#b8701c}
 .stickybuy{background:rgba(255,255,255,.88);border-top:1px solid rgba(75,58,143,.14)}
 .stickybuy .sp span s{color:rgba(36,26,61,.42)}
-
-
