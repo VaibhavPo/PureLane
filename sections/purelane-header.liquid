@@ -1,0 +1,190 @@
+{%- comment -%}
+  Custom Purelane Header Section with integrated Ticker
+{%- endcomment -%}
+
+{%- if section.settings.show_ticker -%}
+  <div class="ticker" aria-hidden="true">
+    <div class="track">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'ticker_item' -%}
+          <span>{{ block.settings.text }} {% if block.settings.highlight_text != blank %}<b>{{ block.settings.highlight_text }}</b>{% endif %}</span>
+        {%- endif -%}-
+      {%- endfor -%}
+      {%- comment -%}Repeat for infinite scroll effect{%- endcomment -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'ticker_item' -%}
+          <span>{{ block.settings.text }} {% if block.settings.highlight_text != blank %}<b>{{ block.settings.highlight_text }}</b>{% endif %}</span>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+<header id="hdr">
+  <div class="navpill glass">
+    <a class="brand" href="#top" aria-label="Purelane home">
+      <span class="mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:#b8701c">
+          <path d="M12 3 20.5 8v8L12 21 3.5 16V8L12 3Z"/>
+          <path d="M12 12 20.5 8M12 12v9M12 12 3.5 8"/>
+        </svg>
+      </span>
+      <span class="txt">
+        <span class="n1">{{ section.settings.brand_name }}</span>
+        <span class="n2">{{ section.settings.brand_tagline }}</span>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="Main">
+      {%- if section.settings.menu != blank -%}
+        {%- for link in section.settings.menu.links -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endfor -%}
+      {%- else -%}
+        <a href="#top">Home</a>
+        <a href="#ingredients">Ingredients</a>
+        <a href="#how">How it works</a>
+        <a href="#shop">Shop</a>
+        <a href="#bundles">Bundles</a>
+      {%- endif -%}
+    </nav>
+
+    <div class="navtools">
+      <button class="ico hide-s" aria-label="Search" onclick="window.location.href='/search'">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+          <circle cx="11" cy="11" r="7"/>
+          <path d="m20 20-3.5-3.5"/>
+        </svg>
+      </button>
+
+      {%- if shop.customer_accounts_enabled -%}
+        <a class="ico hide-s" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+            <circle cx="12" cy="8" r="3.6"/>
+            <path d="M5 20c0-3.6 3.1-5.6 7-5.6s7 2 7 5.6"/>
+          </svg>
+        </a>
+      {%- endif -%}
+
+      <a class="ico" href="{{ routes.cart_url }}" id="cart-icon-bubble" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 6h2l2.2 10.4a1.6 1.6 0 0 0 1.6 1.3h7.6a1.6 1.6 0 0 0 1.6-1.3L20.5 9H6.4"/>
+          <circle cx="10" cy="20.5" r="1.1"/>
+          <circle cx="17.5" cy="20.5" r="1.1"/>
+        </svg>
+        <span class="dot">{{ cart.item_count }}</span>
+      </a>
+
+      <button class="ico burger" aria-label="Menu" onclick="document.querySelector('.nav').classList.toggle('active')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M4 8h16M4 16h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+/* Mobile active menu tweak */
+@media(max-width: 1023px) {
+  .nav.active {
+    display: flex !important;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(23,16,43,0.92);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(236,230,247,.12);
+    border-radius: 18px;
+    padding: 16px;
+    gap: 12px;
+    text-align: center;
+    z-index: 100;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Purelane Header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand Name",
+      "default": "Purelane"
+    },
+    {
+      "type": "text",
+      "id": "brand_tagline",
+      "label": "Brand Tagline",
+      "default": "Clean, simply"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu Override"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_ticker",
+      "label": "Show Announcement Ticker",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ticker_item",
+      "name": "Ticker Announcement",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Normal Text",
+          "default": "100% plant-based"
+        },
+        {
+          "type": "text",
+          "id": "highlight_text",
+          "label": "Highlighted Text",
+          "default": "and non-toxic"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "ticker_item",
+        "settings": {
+          "text": "Free shipping",
+          "highlight_text": "on every bundle across India"
+        }
+      },
+      {
+        "type": "ticker_item",
+        "settings": {
+          "text": "100% plant-based",
+          "highlight_text": "and non-toxic"
+        }
+      },
+      {
+        "type": "ticker_item",
+        "settings": {
+          "text": "Loved by",
+          "highlight_text": "30,000+ happy homes"
+        }
+      },
+      {
+        "type": "ticker_item",
+        "settings": {
+          "text": "Buy 3",
+          "highlight_text": "at flat ₹499"
+        }
+      }
+    ]
+  }
+}
+{% endschema %}

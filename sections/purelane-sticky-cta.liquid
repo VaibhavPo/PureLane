@@ -1,0 +1,50 @@
+{%- comment -%}
+  Custom Purelane Sticky CTA Section (Visible on mobile/tablet viewports)
+{%- endcomment -%}
+
+{%- if section.settings.enable_sticky_cta -%}
+  <div class="sticky" {{ section.shopify_attributes }}>
+    <span class="lbl">
+      <b>{{ section.settings.title }}</b>
+      <span>{{ section.settings.subtitle }}</span>
+    </span>
+    <a class="btn btn-primary btn-sm" href="{{ section.settings.button_link | default: '#bundles' }}">{{ section.settings.button_text }}</a>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Purelane Sticky CTA",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_sticky_cta",
+      "label": "Enable Sticky CTA",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Headline",
+      "default": "Pick any 3, pay ₹499"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtext",
+      "default": "Free shipping, always"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Build bundle"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ]
+}
+{% endschema %}

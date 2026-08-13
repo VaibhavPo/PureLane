@@ -1,0 +1,97 @@
+{%- comment -%}
+  Purelane Full Range Section
+{%- endcomment -%}
+
+<section class="sec" id="range" data-scene="3" {{ section.shopify_attributes }}>
+  <div class="wrap">
+    <div class="glass range rv">
+      <div class="range-head">
+        <div>
+          <span class="kicker">{{ section.settings.kicker }}</span>
+          <h2 class="d2" style="margin-top:10px">{{ section.settings.heading }}</h2>
+        </div>
+        <p class="body-s" style="max-width:34ch;margin-bottom:4px">{{ section.settings.subheading }}</p>
+      </div>
+
+      <div class="stripwrap">
+        <div class="rangerow">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'range_item' -%}
+              <span class="pimg {{ block.settings.image_class }}" role="img" aria-label="{{ block.settings.title }}" {{ block.shopify_attributes }}></span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+      <p class="striphint">{{ section.settings.hint_text }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Purelane Full Range",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "The full range"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Every room, one shelf"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Floors, taps, kitchen, laundry, bathroom and hands. Fourteen plant-based formulas that replace every harsh bottle under your sink."
+    },
+    {
+      "type": "text",
+      "id": "hint_text",
+      "label": "Swipe Hint Text",
+      "default": "Swipe to see the full shelf"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "range_item",
+      "name": "Product Bottle",
+      "settings": [
+        {
+          "type": "text",
+          "id": "image_class",
+          "label": "Image CSS Class",
+          "default": "p-floor"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Floor cleaner"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Full Range",
+      "blocks": [
+        { "type": "range_item", "settings": { "image_class": "p-floor", "title": "Floor cleaner" } },
+        { "type": "range_item", "settings": { "image_class": "p-tap", "title": "Tap cleaner" } },
+        { "type": "range_item", "settings": { "image_class": "p-kitchen", "title": "Kitchen cleaner" } },
+        { "type": "range_item", "settings": { "image_class": "p-toilet", "title": "Toilet cleaner" } },
+        { "type": "range_item", "settings": { "image_class": "p-laundry", "title": "Laundry detergent" } },
+        { "type": "range_item", "settings": { "image_class": "p-dish", "title": "Dishwash gel" } },
+        { "type": "range_item", "settings": { "image_class": "p-metal", "title": "Copper & brass cleaner" } },
+        { "type": "range_item", "settings": { "image_class": "p-wm", "title": "Machine descaler" } },
+        { "type": "range_item", "settings": { "image_class": "p-handwash", "title": "Handwash" } },
+        { "type": "range_item", "settings": { "image_class": "p-eraser", "title": "Magic eraser" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

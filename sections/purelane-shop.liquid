@@ -1,0 +1,229 @@
+{%- comment -%}
+  Purelane Shop / Product Grid Section
+{%- endcomment -%}
+
+<section class="sec" id="shop" data-scene="3" {{ section.shopify_attributes }}>
+  <div class="wrap">
+    <div class="panel-head rv">
+      <span class="kicker">{{ section.settings.kicker }}</span>
+      <h2 class="d2" style="margin-top:12px">{{ section.settings.heading }}</h2>
+      <div class="rule">
+        <i></i>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/>
+          <path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/>
+        </svg>
+        <i></i>
+      </div>
+    </div>
+
+    <div class="shelf">
+      {%- assign selected_collection = section.settings.collection -%}
+      {%- if selected_collection != blank and selected_collection.products_count > 0 -%}
+        {%- for product in selected_collection.products limit: section.settings.products_to_show -%}
+          <article class="glass card rv">
+            <div class="shot">
+              {%- if product.compare_at_price > product.price -%}
+                <span class="pill">Save {{ product.compare_at_price | minus: product.price | money }}</span>
+              {%- endif -%}
+              {%- if product.featured_image != blank -%}
+                <img src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.title | escape }}" loading="lazy" style="max-height:160px;object-fit:contain;margin:0 auto">
+              {%- else -%}
+                <span class="pimg p-tap" role="img"></span>
+              {%- endif -%}
+            </div>
+            <h4>{{ product.title }}</h4>
+            <div class="rate"><b>★ 4.8</b> · 200+ reviews</div>
+            <div class="pr">
+              <strong>{{ product.price | money }}</strong>
+              {%- if product.compare_at_price > product.price -%}
+                <s>{{ product.compare_at_price | money }}</s>
+              {%- endif -%}
+            </div>
+            <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+              <button class="btn btn-ghost btn-sm" type="submit">Add to cart</button>
+            </form>
+          </article>
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%}Fallback Reference Design Cards{%- endcomment -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'product_card' -%}
+            <article class="glass card rv {% if forloop.index == 2 %}rv-d1{% elsif forloop.index == 3 %}rv-d2{% elsif forloop.index == 4 %}rv-d3{% endif %}" {{ block.shopify_attributes }}>
+              <div class="shot">
+                {%- if block.settings.badge_text != blank -%}
+                  <span class="pill">{{ block.settings.badge_text }}</span>
+                {%- endif -%}
+                <span class="pimg {{ block.settings.image_class }}" role="img" aria-label="{{ block.settings.title }}"></span>
+              </div>
+              <h4>{{ block.settings.title }}</h4>
+              <div class="rate"><b>★ {{ block.settings.rating }}</b> · {{ block.settings.review_count }} reviews</div>
+              <div class="pr">
+                <strong>{{ block.settings.price }}</strong>
+                {%- if block.settings.compare_at_price != blank -%}
+                  <s>{{ block.settings.compare_at_price }}</s>
+                {%- endif -%}
+                {%- if block.settings.discount_tag != blank -%}
+                  <em>{{ block.settings.discount_tag }}</em>
+                {%- endif -%}
+              </div>
+              <button class="btn btn-ghost btn-sm">Add to cart</button>
+            </article>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Purelane Shop Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Bestsellers"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Loved by 30,000 homes"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Shopify Collection (Optional)",
+      "info": "If selected, pulls live products from Shopify. Leave blank to use reference fallback cards."
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Live Products to show",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "default": 8
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_card",
+      "name": "Fallback Product Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Badge Text",
+          "default": "Best seller"
+        },
+        {
+          "type": "text",
+          "id": "image_class",
+          "label": "Image CSS Class",
+          "info": "Choose from: p-tap, p-kitchen, p-metal, p-wm, p-laundry, p-toilet, p-floor, p-dish",
+          "default": "p-tap"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product Title",
+          "default": "Tap cleaner & limescale remover"
+        },
+        {
+          "type": "text",
+          "id": "rating",
+          "label": "Rating",
+          "default": "4.8"
+        },
+        {
+          "type": "text",
+          "id": "review_count",
+          "label": "Review Count",
+          "default": "237"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "₹200"
+        },
+        {
+          "type": "text",
+          "id": "compare_at_price",
+          "label": "Compare at Price",
+          "default": "₹299"
+        },
+        {
+          "type": "text",
+          "id": "discount_tag",
+          "label": "Discount Tag",
+          "default": "33% off"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Shop Grid",
+      "blocks": [
+        {
+          "type": "product_card",
+          "settings": {
+            "badge_text": "Best seller",
+            "image_class": "p-tap",
+            "title": "Tap cleaner & limescale remover",
+            "rating": "4.8",
+            "review_count": "237",
+            "price": "₹200",
+            "compare_at_price": "₹299",
+            "discount_tag": "33% off"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "badge_text": "Best seller",
+            "image_class": "p-kitchen",
+            "title": "Kitchen cleaner, foaming",
+            "rating": "4.8",
+            "review_count": "254",
+            "price": "₹200",
+            "compare_at_price": "₹299",
+            "discount_tag": "33% off"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "badge_text": "Top rated",
+            "image_class": "p-metal",
+            "title": "Copper, bronze & brass cleaner",
+            "rating": "4.8",
+            "review_count": "231",
+            "price": "₹200",
+            "compare_at_price": "₹299",
+            "discount_tag": "33% off"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "badge_text": "New",
+            "image_class": "p-wm",
+            "title": "Washing machine cleaner & descaler",
+            "rating": "4.8",
+            "review_count": "183",
+            "price": "₹200",
+            "compare_at_price": "₹299",
+            "discount_tag": "33% off"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,121 @@
+{%- comment -%}
+  Purelane Why Bundles Section
+{%- endcomment -%}
+
+<section class="sec" id="whybundles" data-scene="4" {{ section.shopify_attributes }}>
+  <div class="wrap">
+    <div class="glass sec-pad rv">
+      <div class="panel-head">
+        <span class="kicker">{{ section.settings.kicker }}</span>
+        <h2 class="d2" style="margin-top:12px">{{ section.settings.heading }}</h2>
+      </div>
+
+      <div class="wb">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'benefit' -%}
+            <div class="wb-i" {{ block.shopify_attributes }}>
+              <span class="ci">
+                {%- if block.settings.custom_svg != blank -%}
+                  {{ block.settings.custom_svg }}
+                {%- else -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="m9 12 2 2 4-4"/>
+                  </svg>
+                {%- endif -%}
+              </span>
+              <h4>{{ block.settings.title }}</h4>
+              <p>{{ block.settings.description }}</p>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Purelane Why Bundles",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "The smarter way to shop"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why bundles beat buying single"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit Item",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "html",
+          "id": "custom_svg",
+          "label": "Custom SVG Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Save up to 45%"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Versus buying the same products separately"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Why Bundles",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "Save up to 45%",
+            "description": "Versus buying the same products separately",
+            "custom_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3v18\"/><path d=\"M16.5 7.2C15.6 6 14 5.4 12 5.4c-2.4 0-4 1.1-4 2.9 0 2 1.7 2.7 4.2 3.3 2.7.6 4.3 1.4 4.3 3.4 0 1.9-1.7 3.1-4.5 3.1-2.2 0-3.8-.7-4.8-2\"/></svg>"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "One flat price",
+            "description": "No calculators, no comparing carts",
+            "custom_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3.4\"/><path d=\"m8.4 12.2 2.4 2.4 4.8-5\"/></svg>"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "Curated by experts",
+            "description": "Products picked to work well together",
+            "custom_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.6 9.7l5.8-.8Z\"/></svg>"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "Free shipping always",
+            "description": "Included on every bundle, all India",
+            "custom_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M2.6 16.4V7.2h10.2v9.2\"/><path d=\"M12.8 10.4h4l3.6 3.2v2.8h-7.6\"/><circle cx=\"6.6\" cy=\"18\" r=\"1.9\"/><circle cx=\"16.6\" cy=\"18\" r=\"1.9\"/></svg>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

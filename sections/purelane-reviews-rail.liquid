@@ -1,0 +1,164 @@
+{%- comment -%}
+  Purelane Reviews Rail Section
+{%- endcomment -%}
+
+<section class="sec revband" id="reviews" data-scene="1" {{ section.shopify_attributes }}>
+  <div class="wrap">
+    <div class="revhead rv">
+      <span class="kicker">{{ section.settings.kicker }}</span>
+      <span class="agg"><span class="st">★★★★★</span> <b>{{ section.settings.rating_score }}</b> {{ section.settings.reviews_count }}</span>
+      <span class="agg">{{ section.settings.homes_loved }}</span>
+    </div>
+  </div>
+  
+  <div class="revrail rv" aria-label="Customer reviews">
+    <div class="revtrack">
+      {%- comment -%}Render list of reviews twice for seamless marquee loop{%- endcomment -%}
+      {%- for i in (1..2) -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'review' -%}
+            <article class="glass-2 rcard" {{ block.shopify_attributes }}>
+              <div class="st">
+                {%- for star in (1..block.settings.rating) -%}★{%- endfor -%}
+              </div>
+              <h5>{{ block.settings.title }}</h5>
+              <p>{{ block.settings.content }}</p>
+              <div class="who">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m5 13 4 4L19 7"/>
+                </svg>
+                <b>{{ block.settings.author }}</b>
+                <span>&middot; {{ block.settings.product_purchased }}</span>
+              </div>
+            </article>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Purelane Reviews Rail",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "That's what they said"
+    },
+    {
+      "type": "text",
+      "id": "rating_score",
+      "label": "Rating Score",
+      "default": "4.8"
+    },
+    {
+      "type": "text",
+      "id": "reviews_count",
+      "label": "Reviews Count Text",
+      "default": "from 8,000+ reviews"
+    },
+    {
+      "type": "text",
+      "id": "homes_loved",
+      "label": "Loved By Text",
+      "default": "Loved by 12 lakh+ homes"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Customer Review",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating (Stars)",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Review Title",
+          "default": "Works like a charm"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Review Content",
+          "default": "Finally an eco option that cleans as well as the chemical detergent I used for years, and it smells better."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author Name",
+          "default": "Anita"
+        },
+        {
+          "type": "text",
+          "id": "product_purchased",
+          "label": "Product Purchased",
+          "default": "Laundry detergent"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Reviews Rail",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "title": "Works like a charm",
+            "content": "Finally an eco option that cleans as well as the chemical detergent I used for years, and it smells better.",
+            "author": "Anita",
+            "product_purchased": "Laundry detergent"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "title": "Best dishwash ever",
+            "content": "Our old dishwash left my help with dry, cracked skin. That stopped completely after we switched.",
+            "author": "Priya",
+            "product_purchased": "Dishwash gel"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "title": "Great product, great packaging",
+            "content": "Very soft on hands with a lovely fragrance, and it feels good to be using far less plastic.",
+            "author": "Sunita",
+            "product_purchased": "Liquid handwash"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "title": "Dog friendly",
+            "content": "We switched because chemical floor cleaners were setting off my dog's allergies. No reactions since.",
+            "author": "Rohit S.",
+            "product_purchased": "Floor cleaner"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "title": "Sparkling taps again",
+            "content": "Hard water had ruined our bathroom fittings. Two sprays and the scale wipes straight off, no scrubbing.",
+            "author": "Verified buyer",
+            "product_purchased": "Tap cleaner"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

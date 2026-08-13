@@ -1,0 +1,329 @@
+{%- comment -%}
+  Purelane Hero Section
+{%- endcomment -%}
+
+<section class="hero" data-scene="1" {{ section.shopify_attributes }}>
+  <div class="hero-grid">
+
+    {%- if section.settings.show_badges -%}
+      <div class="badges glass-2" aria-label="Product promises">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'badge' -%}
+            <div class="badge" {{ block.shopify_attributes }}>
+              <span class="bi">
+                {%- if block.settings.custom_icon_svg != blank -%}
+                  {{ block.settings.custom_icon_svg }}
+                {%- else -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="m9 12 2 2 4-4"/>
+                  </svg>
+                {%- endif -%}
+              </span>
+              <span>{{ block.settings.text }}</span>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="hero-copy">
+      <h1 class="d1 rv in">
+        {{ section.settings.heading | replace: '[', '<span class="lime">' | replace: ']', '</span>' }}
+      </h1>
+      <div class="rule rv rv-d1">
+        <i></i>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/>
+          <path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/>
+        </svg>
+        <i></i>
+      </div>
+      <p class="lede rv rv-d2">{{ section.settings.subheading }}</p>
+      <div class="hero-cta rv rv-d3">
+        <a class="btn btn-primary" href="{{ section.settings.button_1_link | default: '#shop' }}">
+          {{ section.settings.button_1_text }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h13m-5-6 6 6-6 6"/>
+          </svg>
+        </a>
+        {%- if section.settings.button_2_text != blank -%}
+          <a class="btn btn-ghost" href="{{ section.settings.button_2_link | default: '#how' }}">{{ section.settings.button_2_text }}</a>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.show_badges -%}
+        <div class="badgestrip rv rv-d4">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'badge' -%}
+              <div class="glass-2">
+                {%- if block.settings.custom_icon_svg != blank -%}
+                  {{ block.settings.custom_icon_svg }}
+                {%- else -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="m9 12 2 2 4-4"/>
+                  </svg>
+                {%- endif -%}
+                {{ block.settings.text | replace: '<br>', ' ' }}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="hero-prod" id="heroProd">
+      <div class="hstage" id="hstage">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'slide' -%}
+            <div class="hslide {% if forloop.first %}on{% endif %} hs{{ forloop.index }}" data-n="{{ forloop.index }}">
+              {%- if block.settings.image_1_class != blank -%}
+                <span class="hp {{ block.settings.image_1_class }} a d1" role="img" aria-label="{{ block.settings.image_1_alt }}"></span>
+              {%- endif -%}
+              {%- if block.settings.image_2_class != blank -%}
+                <span class="hp {{ block.settings.image_2_class }} b d2" role="img" aria-label="{{ block.settings.image_2_alt }}"></span>
+              {%- endif -%}
+              {%- if block.settings.image_3_class != blank -%}
+                <span class="hp {{ block.settings.image_3_class }} c d3" role="img" aria-label="{{ block.settings.image_3_alt }}"></span>
+              {%- endif -%}
+
+              <div class="glass-2 ptag">
+                <span class="lbl">{{ block.settings.price_label }}</span>
+                <span class="val">
+                  <strong>{{ block.settings.price }}</strong>
+                  {%- if block.settings.compare_at_price != blank -%}
+                    <s>{{ block.settings.compare_at_price }}</s>
+                  {%- endif -%}
+                </span>
+                {%- if block.settings.discount_tag != blank -%}
+                  <span class="cut">{{ block.settings.discount_tag }}</span>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      <div class="hdots" id="hdots">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'slide' -%}
+            <button type="button" class="{% if forloop.first %}on{% endif %}" aria-label="Show {{ block.settings.price_label }}"></button>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Purelane Hero",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Use square brackets to wrap text that should be lime colored. E.g. Clean That [Lasts]",
+      "default": "Clean<br>That<br>[Lasts]"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Homecare that works on the toughest grime, made from plants. Kind to your home, your family and the world outside it."
+    },
+    {
+      "type": "text",
+      "id": "button_1_text",
+      "label": "Primary Button Text",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_2_text",
+      "label": "Secondary Button Text",
+      "default": "How it works"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badges",
+      "label": "Show Trust Badges",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Badge Item",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "html",
+          "id": "custom_icon_svg",
+          "label": "Custom SVG Icon",
+          "info": "Leave blank to use default check circle icon"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Badge Text",
+          "default": "Plant<br>powered"
+        }
+      ]
+    },
+    {
+      "type": "slide",
+      "name": "Product Slide",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Image 1 (Left/Back)"
+        },
+        {
+          "type": "text",
+          "id": "image_1_class",
+          "label": "Image 1 CSS Class",
+          "info": "Choose from: p-kbtl, p-tbtl, p-mbtl, p-dish, p-floor, p-tap, p-toilet, p-wm",
+          "default": "p-kbtl"
+        },
+        {
+          "type": "text",
+          "id": "image_1_alt",
+          "label": "Image 1 Alt Text",
+          "default": "Foaming kitchen cleaner"
+        },
+        {
+          "type": "header",
+          "content": "Image 2 (Center/Front)"
+        },
+        {
+          "type": "text",
+          "id": "image_2_class",
+          "label": "Image 2 CSS Class",
+          "info": "Leave blank for single product slide"
+        },
+        {
+          "type": "text",
+          "id": "image_2_alt",
+          "label": "Image 2 Alt Text"
+        },
+        {
+          "type": "header",
+          "content": "Image 3 (Right/Mid)"
+        },
+        {
+          "type": "text",
+          "id": "image_3_class",
+          "label": "Image 3 CSS Class",
+          "info": "Leave blank for 1 or 2 product slides"
+        },
+        {
+          "type": "text",
+          "id": "image_3_alt",
+          "label": "Image 3 Alt Text"
+        },
+        {
+          "type": "header",
+          "content": "Pricing Tag"
+        },
+        {
+          "type": "text",
+          "id": "price_label",
+          "label": "Price Label",
+          "default": "Single bottle"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "₹200"
+        },
+        {
+          "type": "text",
+          "id": "compare_at_price",
+          "label": "Compare at Price",
+          "default": "₹299"
+        },
+        {
+          "type": "text",
+          "id": "discount_tag",
+          "label": "Discount tag text",
+          "default": "33% off"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Hero",
+      "blocks": [
+        {
+          "type": "badge",
+          "settings": {
+            "text": "Plant<br>powered",
+            "custom_icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z\"/><path d=\"M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z\"/></svg>"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "text": "Safe for<br>kids &amp; pets",
+            "custom_icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3 4.5 6v6.2c0 4.3 3.1 7.6 7.5 8.8 4.4-1.2 7.5-4.5 7.5-8.8V6L12 3Z\"/><path d=\"m9 12 2.2 2.2L15.4 10\"/></svg>"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "text": "Zero harsh<br>chemicals",
+            "custom_icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"8.4\"/><path d=\"M6.4 17.6 17.6 6.4\"/></svg>"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "image_1_class": "p-kbtl",
+            "price_label": "Single bottle",
+            "price": "₹200",
+            "compare_at_price": "₹299",
+            "discount_tag": "33% off"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "image_1_class": "p-tbtl",
+            "image_2_class": "p-kbtl",
+            "price_label": "Any 2 products",
+            "price": "₹349",
+            "compare_at_price": "₹598",
+            "discount_tag": "Save ₹249"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "image_1_class": "p-tbtl",
+            "image_2_class": "p-mbtl",
+            "image_3_class": "p-kbtl",
+            "price_label": "Any 3 products",
+            "price": "₹499",
+            "compare_at_price": "₹897",
+            "discount_tag": "Save ₹398"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

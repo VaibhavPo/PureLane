@@ -1,0 +1,114 @@
+{
+  "sections": {
+    "purelane_hero": {
+      "type": "purelane-hero",
+      "settings": {
+        "heading": "Clean<br>That<br>[Lasts]",
+        "subheading": "Homecare that works on the toughest grime, made from plants. Kind to your home, your family and the world outside it.",
+        "button_1_text": "Shop now",
+        "button_2_text": "How it works",
+        "show_badges": true
+      }
+    },
+    "purelane_reviews_rail": {
+      "type": "purelane-reviews-rail",
+      "settings": {
+        "kicker": "That's what they said",
+        "rating_score": "4.8",
+        "reviews_count": "from 8,000+ reviews",
+        "homes_loved": "Loved by 12 lakh+ homes"
+      }
+    },
+    "purelane_ingredients": {
+      "type": "purelane-ingredients",
+      "settings": {
+        "heading": "Sourced from nature"
+      }
+    },
+    "purelane_pillars": {
+      "type": "purelane-pillars",
+      "settings": {}
+    },
+    "purelane_proof": {
+      "type": "purelane-proof",
+      "settings": {
+        "kicker": "Why it works",
+        "heading": "Tough on grime.\nGentle on everything else.",
+        "description": "Every formula is built on plant-derived cleansers and essential oils. It behaves exactly like the cleaner you are used to, minus the things you never signed up for.",
+        "button_text": "See the ingredient list"
+      }
+    },
+    "purelane_combos": {
+      "type": "purelane-combos",
+      "settings": {
+        "kicker": "Pre-built to save you money",
+        "heading": "Best selling combos",
+        "subheading": "Swipe through the boxes people order most. Each one is already priced below buying the same products on their own."
+      }
+    },
+    "purelane_bundles": {
+      "type": "purelane-bundles",
+      "settings": {
+        "kicker": "Build your bundle",
+        "heading": "One box. Every room.",
+        "subheading": "Mix and match across kitchen, laundry, home and skin. One flat price, no code needed, free shipping either way."
+      }
+    },
+    "purelane_shop": {
+      "type": "purelane-shop",
+      "settings": {
+        "kicker": "Bestsellers",
+        "heading": "Loved by 30,000 homes"
+      }
+    },
+    "purelane_full_range": {
+      "type": "purelane-full-range",
+      "settings": {
+        "kicker": "The full range",
+        "heading": "Every room, one shelf",
+        "subheading": "Floors, taps, kitchen, laundry, bathroom and hands. Fourteen plant-based formulas that replace every harsh bottle under your sink."
+      }
+    },
+    "purelane_why_bundles": {
+      "type": "purelane-why-bundles",
+      "settings": {
+        "kicker": "The smarter way to shop",
+        "heading": "Why bundles beat buying single"
+      }
+    },
+    "purelane_categories": {
+      "type": "purelane-categories",
+      "settings": {
+        "kicker": "Bundle categories",
+        "heading": "Find the right bundle for you"
+      }
+    },
+    "purelane_trust_bar": {
+      "type": "purelane-trust-bar",
+      "settings": {}
+    },
+    "purelane_signup": {
+      "type": "purelane-signup",
+      "settings": {
+        "kicker": "Join the Purelane Club",
+        "heading": "Get ₹100 off your first bundle",
+        "subheading": "Plus first access to new launches and restocks."
+      }
+    }
+  },
+  "order": [
+    "purelane_hero",
+    "purelane_reviews_rail",
+    "purelane_ingredients",
+    "purelane_pillars",
+    "purelane_proof",
+    "purelane_combos",
+    "purelane_bundles",
+    "purelane_shop",
+    "purelane_full_range",
+    "purelane_why_bundles",
+    "purelane_categories",
+    "purelane_trust_bar",
+    "purelane_signup"
+  ]
+}

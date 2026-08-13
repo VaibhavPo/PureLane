@@ -1,0 +1,107 @@
+{%- comment -%}
+  Purelane Brand Pillars Section
+{%- endcomment -%}
+
+<section class="sec" id="how" data-scene="2" {{ section.shopify_attributes }}>
+  <div class="wrap">
+    <div class="pillars">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'pillar' -%}
+          <article class="glass pillar rv {% if forloop.index == 2 %}rv-d2{% elsif forloop.index == 3 %}rv-d3{% endif %}" {{ block.shopify_attributes }}>
+            <span class="pi">
+              {%- if block.settings.custom_icon_svg != blank -%}
+                {{ block.settings.custom_icon_svg }}
+              {%- else -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="m9 12 2 2 4-4"/>
+                </svg>
+              {%- endif -%}
+            </span>
+            <h3 class="d3">{{ block.settings.title }}</h3>
+            <p class="body-s">{{ block.settings.content }}</p>
+            {%- if block.settings.button_text != blank -%}
+              <a class="btn btn-ghost btn-sm" href="{{ block.settings.button_link | default: '#shop' }}">{{ block.settings.button_text }}</a>
+            {%- endif -%}
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Purelane Pillars",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Brand Pillar",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "html",
+          "id": "custom_icon_svg",
+          "label": "Custom SVG Icon",
+          "info": "Paste SVG code here"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Pillar Title",
+          "default": "Less scrubbing"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Pillar Content",
+          "default": "A foaming formulation. The foam clings to grease and lifts it, so you wipe instead of scrub."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Learn more"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Pillars",
+      "blocks": [
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Less scrubbing",
+            "content": "A foaming formulation. The foam clings to grease and lifts it, so you wipe instead of scrub.",
+            "custom_icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"8\" cy=\"8.5\" r=\"3.2\"/><circle cx=\"16.4\" cy=\"6.6\" r=\"2.2\"/><circle cx=\"15\" cy=\"13\" r=\"2.8\"/><circle cx=\"8.6\" cy=\"15.6\" r=\"2.1\"/><path d=\"M4 21h16\"/></svg>"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Clean ingredients",
+            "content": "No sulphates, no chlorine, no synthetic fragrance. Nothing on the label you would not want near your food.",
+            "custom_icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3 4.5 6v6.2c0 4.3 3.1 7.6 7.5 8.8 4.4-1.2 7.5-4.5 7.5-8.8V6L12 3Z\"/><path d=\"m9 12 2.2 2.2L15.4 10\"/></svg>"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Safe around everyone",
+            "content": "Gentle on hands, safe around kids and pets, and it leaves no toxic residue on the surfaces you touch every day.",
+            "custom_icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 20s-7-4.4-7-9.4A4.1 4.1 0 0 1 12 8a4.1 4.1 0 0 1 7 2.6c0 5-7 9.4-7 9.4Z\"/></svg>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
