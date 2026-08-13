@@ -472,8 +472,8 @@
             "badge_text": "Best seller",
             "image_class": "p-tap",
             "title": "Tap cleaner & limescale remover",
-            "rating": "{{product.metafields.reviews.rating}}",
-            "review_count": "{{product.metafields.reviews.rating_count}}",
+            "rating": "4.2",
+            "review_count": "227",
             "price": "₹200",
             "compare_at_price": "₹299",
             "discount_tag": "33% off"
@@ -485,8 +485,8 @@
             "badge_text": "Best seller",
             "image_class": "p-kitchen",
             "title": "Kitchen cleaner, foaming",
-            "rating": "{{product.metafields.reviews.rating}}",
-            "review_count": "{{product.metafields.reviews.rating_count}}",
+            "rating": "4.2",
+            "review_count": "227",
             "price": "₹200",
             "compare_at_price": "₹299",
             "discount_tag": "33% off"
@@ -498,8 +498,8 @@
             "badge_text": "Top rated",
             "image_class": "p-metal",
             "title": "Copper, bronze & brass cleaner",
-            "rating": "{{product.metafields.reviews.rating}}",
-            "review_count": "{{product.metafields.reviews.rating_count}}",
+            "rating": "4.2",
+            "review_count": "227",
             "price": "₹200",
             "compare_at_price": "₹299",
             "discount_tag": "33% off"
@@ -511,8 +511,8 @@
             "badge_text": "New",
             "image_class": "p-wm",
             "title": "Washing machine cleaner & descaler",
-            "rating": "{{product.metafields.reviews.rating}}",
-            "review_count": "{{product.metafields.reviews.rating_count}}",
+            "rating": "4.2",
+            "review_count": "227",
             "price": "₹200",
             "compare_at_price": "₹299",
             "discount_tag": "33% off"

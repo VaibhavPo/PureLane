@@ -10,102 +10,81 @@
       <div class="rule"><i></i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/><path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/></svg><i></i></div>
     </div>
 
-    <div class="shelf">
+    <div class="shelf" id="shopShelf">
       {%- for block in section.blocks -%}
         {%- assign product = block.settings.product -%}
         {%- if product != blank -%}
           {%- liquid
-            assign rating_val = nil
-            assign rating_count_val = nil
+            assign rating_val = block.settings.rating | default: product.metafields.custom.rating | default: product.metafields.reviews.rating
+            assign rating_count_val = block.settings.rating_count | default: product.metafields.custom.rating_count | default: product.metafields.reviews.rating_count
 
-            # Try custom namespace (Shopify's default namespace for custom metafields)
-            assign r_obj = product.metafields.custom.rating
-            assign r_val = r_obj.value | default: r_obj
-            if r_val != blank
-              if r_val.rating != blank
-                assign rating_val = r_val.rating
-              else
-                assign r_str = r_val | append: "" | strip
-                if r_str contains ' out of '
-                  assign rating_val = r_str | split: ' out of ' | first
-                else
-                  assign rating_val = r_str
-                endif
-              endif
-            endif
-
-            assign rc_obj = product.metafields.custom.rating_count
-            assign rc_val = rc_obj.value | default: rc_obj
-            if rc_val != blank
-              assign rating_count_val = rc_val
-            endif
-
-            # Try reviews namespace fallback
-            if rating_val == blank
-              assign r_obj = product.metafields.reviews.rating
-              assign r_val = r_obj.value | default: r_obj
-              if r_val != blank
-                if r_val.rating != blank
-                  assign rating_val = r_val.rating
-                else
-                  assign r_str = r_val | append: "" | strip
-                  if r_str contains ' out of '
-                    assign rating_val = r_str | split: ' out of ' | first
-                  else
-                    assign rating_val = r_str
-                  endif
-                endif
-              endif
-            endif
-
-            if rating_count_val == blank
-              assign rc_obj = product.metafields.reviews.rating_count
-              assign rc_val = rc_obj.value | default: rc_obj
-              if rc_val != blank
-                assign rating_count_val = rc_val
-              endif
-            endif
-
-            # Try block settings fallback / override
-            if rating_val == blank or rating_val == '0' or rating_val == 0
-              assign rating_val = block.settings.rating
-            endif
-            if rating_count_val == blank or rating_count_val == '0' or rating_count_val == 0
-              assign rating_count_val = block.settings.review_count
-            endif
-
+            assign product_title = product.title
+            assign product_price = product.price
+            assign compare_at_price = product.compare_at_price
             assign discount = product.compare_at_price | minus: product.price
-            assign image_alt = product.featured_image.alt | default: product.title
+            assign image_alt = product.featured_image.alt | default: product_title
             assign product_tag = product.tags.first
+            assign variant_id = product.selected_or_first_available_variant.id
+            assign is_available = product.available
           -%}
-          <article class="glass card rv {% if forloop.index == 2 %}rv-d1{% elsif forloop.index == 3 %}rv-d2{% elsif forloop.index == 4 %}rv-d3{% endif %}" {{ block.shopify_attributes }}>
+          <article
+            class="glass card rv {% if forloop.index == 2 %}rv-d1{% elsif forloop.index == 3 %}rv-d2{% elsif forloop.index == 4 %}rv-d3{% endif %}{% unless is_available %} sold-out{% endunless %}"
+            data-name="{{ product_title | escape }}"
+            data-available="{{ is_available }}"
+            data-variant-id="{{ variant_id }}"
+            {{ block.shopify_attributes }}>
+
             <div class="shot">
-              {%- if product_tag != blank -%}<span class="pill">{{ product_tag }}</span>{%- endif -%}
-              {%- if product.featured_image != blank -%}
+              {%- if is_available == false -%}
+                <span class="pill">Sold out</span>
+              {%- elsif product_tag != blank -%}
+                <span class="pill">{{ product_tag }}</span>
+              {%- endif -%}
+              {%- if product != blank and product.featured_image != blank -%}
                 {{ product.featured_image | image_url: width: 500 | image_tag: alt: image_alt, loading: 'lazy' }}
               {%- else -%}
-                <span class="pimg p-tap" role="img" aria-label="{{ product.title | escape }}"></span>
+                <span class="pimg p-tap" role="img" aria-label="{{ product_title | escape }}"></span>
               {%- endif -%}
             </div>
-            <h4>{{ product.title }}</h4>
+
+            <h4>{{ product_title }}</h4>
+
             {%- if rating_val != blank or rating_count_val != blank -%}
               <div class="rate">
-                {%- if rating_val != blank -%}
-                  <b>★ {{ rating_val }}</b>
-                {%- endif -%}
-                {%- if rating_count_val != blank -%}
-                  <span> · {{ rating_count_val }} reviews</span>
-                {%- endif -%}
+                {%- if rating_val != blank -%}<b>★ {{ rating_val }}</b>{%- endif -%}
+                {%- if rating_count_val != blank -%}<span> · {{ rating_count_val }} reviews</span>{%- endif -%}
               </div>
             {%- endif -%}
+
             <div class="pr">
-              <strong>{{ product.price | money_without_trailing_zeros }}</strong>
-              {%- if product.compare_at_price > product.price -%}<s>{{ product.compare_at_price | money_without_trailing_zeros }}</s><em>{{ discount | times: 100.0 | divided_by: product.compare_at_price | round }}% off</em>{%- endif -%}
+              <strong>{{ product_price | money_without_trailing_zeros }}</strong>
+              {%- if compare_at_price != blank and product_price != blank and compare_at_price > product_price -%}
+                <s>{{ compare_at_price | money_without_trailing_zeros }}</s>
+                {%- if compare_at_price != blank and product_price != blank and compare_at_price > 0 -%}
+                  <em>{{ discount | times: 100.0 | divided_by: compare_at_price | round }}% off</em>
+                {%- endif -%}
+              {%- endif -%}
             </div>
-            <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
-              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-              <button class="btn btn-ghost btn-sm" type="submit" {% unless product.available %}disabled{% endunless %}>{% if product.available %}Add to cart{% else %}Sold out{% endif %}</button>
-            </form>
+
+            {%- if is_available -%}
+              <div class="card-cart-row">
+                <button
+                  class="btn btn-ghost btn-sm btn-atc"
+                  type="button"
+                  data-variant="{{ variant_id }}"
+                  aria-label="Add {{ product_title | escape }} to cart">
+                  Add to cart
+                </button>
+                <div class="card-qty" style="display:none" aria-label="Quantity in cart">
+                  <button class="card-qty-btn" type="button" data-action="dec" aria-label="Remove one">−</button>
+                  <span class="card-qty-num">1</span>
+                  <button class="card-qty-btn" type="button" data-action="inc" aria-label="Add one more">+</button>
+                </div>
+              </div>
+            {%- else -%}
+              <button class="btn btn-ghost btn-sm btn-atc" type="button" disabled aria-disabled="true">Sold out</button>
+            {%- endif -%}
+
           </article>
         {%- endif -%}
       {%- endfor -%}
@@ -122,13 +101,15 @@
   ],
   "blocks": [{
     "type": "product_card",
-    "name": "Shopify product",
+    "name": "Product",
     "settings": [
-      { "type": "product", "id": "product", "label": "Product" },
-      { "type": "text", "id": "rating", "label": "Fallback Rating (e.g. 4.8)" },
-      { "type": "text", "id": "review_count", "label": "Fallback Review Count (e.g. 237)" }
+      { "type": "product", "id": "product", "label": "Select product" },
+      { "type": "paragraph", "content": "Select the rating and review_count metafields for updated ratings." },
+      { "type": "text", "id": "rating", "label": "Rating" },
+      { "type": "text", "id": "rating_count", "label": "Review count" }
     ]
   }],
   "presets": [{ "name": "Purelane Product Grid", "blocks": [{ "type": "product_card" }, { "type": "product_card" }, { "type": "product_card" }, { "type": "product_card" }] }]
 }
 {% endschema %}
+

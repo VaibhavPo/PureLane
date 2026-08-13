@@ -839,3 +839,64 @@ footer{background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(214,241,221,
 .rbar .tr i{background:#b8701c}
 .stickybuy{background:rgba(255,255,255,.88);border-top:1px solid rgba(75,58,143,.14)}
 .stickybuy .sp span s{color:rgba(36,26,61,.42)}
+
+/* ---------- CARD CART ROW ---------- */
+.card-cart-row{display:flex;gap:8px;align-items:center;margin-top:auto}
+.card-cart-row .btn-atc{flex:1;justify-content:center}
+.card-qty{display:flex;align-items:center;gap:6px;height:38px;padding:0 10px;border-radius:999px;
+  background:rgba(255,255,255,.90);border:1px solid rgba(75,58,143,.25);width:100%;justify-content:space-between}
+.card-qty-btn{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;
+  font-size:16px;font-weight:700;color:#01423b;background:rgba(75,58,143,.06);border:none;cursor:pointer;
+  transition:.2s;line-height:1}
+.card-qty-btn:hover{background:rgba(75,58,143,.18)}
+.card-qty-num{font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--surface);min-width:20px;text-align:center}
+
+/* ---------- SOLD OUT ---------- */
+.card.sold-out .btn-atc{opacity:.45;pointer-events:none;cursor:not-allowed}
+.card.sold-out .shot{opacity:.72}
+.card.sold-out .pill{background:rgba(180,20,20,.12);border-color:rgba(180,20,20,.30);color:#b41414}
+
+/* ---------- BUNDLE MODE ---------- */
+body.bundle-mode #shop .card{transition:outline .2s,box-shadow .2s}
+body.bundle-mode #shop .card.in-bundle{
+  outline:2px solid #00706a;outline-offset:3px;
+  box-shadow:0 0 0 5px rgba(0,112,106,.12);}
+body.bundle-mode #shop .card .btn-atc{
+  background:rgba(0,112,106,.10);border-color:rgba(0,112,106,.40);color:#00706a;}
+body.bundle-mode #shop .card.in-bundle .btn-atc{
+  background:rgba(0,112,106,.20);border-color:#00706a;color:#005752;font-weight:800;}
+
+/* ---------- BUNDLE PROGRESS BAR ---------- */
+.bpbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;
+  padding:14px 22px calc(14px + env(safe-area-inset-bottom));
+  background:rgba(255,255,255,.98);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  border-top:2px solid rgba(75,58,143,.18);
+  transform:translateY(110%);transition:transform .42s cubic-bezier(.2,.7,.2,1);
+  display:flex;flex-direction:column;gap:10px;
+  box-shadow:0 -10px 40px rgba(36,26,61,.14)}
+.bpbar.show{transform:translateY(0)}
+.bpbar-top{display:flex;align-items:center;gap:12px}
+.bpbar-label{flex:1;line-height:1.25}
+.bpbar-label b{display:block;font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;
+  text-transform:uppercase;letter-spacing:.04em;color:#17102b}
+.bpbar-label span{font-size:12px;color:rgba(36,26,61,.70)}
+.bpbar-actions{display:flex;align-items:center;gap:8px}
+.bpbar-cancel{height:36px;padding:0 16px;border-radius:999px;font-size:11px;font-weight:700;
+  letter-spacing:.10em;text-transform:uppercase;font-family:'Inter',sans-serif;
+  background:rgba(75,58,143,.08);border:1px solid rgba(75,58,143,.22);color:#241a3d;
+  cursor:pointer;transition:.25s}
+.bpbar-cancel:hover{background:rgba(75,58,143,.16)}
+.bpbar-checkout{height:36px;padding:0 18px;border-radius:999px;font-size:11px;font-weight:800;
+  letter-spacing:.10em;text-transform:uppercase;font-family:'Inter',sans-serif;
+  background:linear-gradient(135deg,#00706a,#004b46);color:#ffffff;cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,80,74,.26);transition:.25s;
+  opacity:.40;pointer-events:none}
+.bpbar-checkout.ready{opacity:1;pointer-events:auto;box-shadow:0 8px 24px rgba(0,112,106,.40)}
+.bpbar-track{height:8px;border-radius:999px;background:rgba(36,26,61,.12);border:1px solid rgba(36,26,61,.12);overflow:hidden;display:block;width:100%;flex-shrink:0;box-shadow:inset 0 1px 2px rgba(36,26,61,.08)}
+.bpbar .bpbar-fill{display:block !important;visibility:visible !important;opacity:1 !important;position:relative;z-index:1;height:8px;border-radius:999px;background:linear-gradient(90deg,#6cc2b0,#0d7f73 45%,#005f59 100%);box-shadow:0 0 12px rgba(13,127,115,.42);
+  transition:width .45s cubic-bezier(.2,.7,.2,1);width:var(--bp-progress, 0%);min-height:8px;min-width:0}
+
+/* cart dot pop */
+@keyframes cartpop{0%{transform:scale(1)}35%{transform:scale(1.6)}70%{transform:scale(.88)}100%{transform:scale(1)}}
+.dot.pop{animation:cartpop .38s ease both}
