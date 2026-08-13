@@ -30,6 +30,18 @@
               {%- for link in block.settings.menu.links -%}
                 <a href="{{ link.url }}">{{ link.title }}</a>
               {%- endfor -%}
+            {%- elsif block.settings.title == 'Shop' -%}
+              <a href="#shop">Bestsellers</a>
+              <a href="#shop">Kitchen</a>
+              <a href="#shop">Laundry</a>
+              <a href="#shop">Home</a>
+              <a href="#shop">Skin</a>
+              <a href="#bundles">Starter kits</a>
+            {%- elsif block.settings.title == 'About' -%}
+              <a href="#how">How it works</a>
+              <a href="#ingredients">Sustainability</a>
+              <a href="#reviews">FAQs</a>
+              <a href="#reviews">Reviews</a>
             {%- endif -%}
           </div>
         {%- elsif block.type == 'contact_info' -%}
