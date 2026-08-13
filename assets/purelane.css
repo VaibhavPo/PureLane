@@ -658,10 +658,10 @@ body.template-index{background:var(--ink)}
 
 /* ---------- scenes: sunlit shallow water ---------- */
 .scenes{background:#b7dfc8}
-.s1{background:linear-gradient(180deg,#effaf3 0%,#e7f7ec 24%,#d8f0df 54%,#b8dfc8 100%)}
-.s2{background:linear-gradient(180deg,#edf9f2 0%,#e0f3e6 28%,#cce9d5 58%,#b1dbbf 100%)}
-.s3{background:linear-gradient(180deg,#e9f7ee 0%,#d9efdf 30%,#bee2cc 60%,#a5d3b6 100%)}
-.s4{background:linear-gradient(180deg,#e4f4e9 0%,#cde8d6 32%,#acdbbd 62%,#91cba9 100%)}
+.s1{background:linear-gradient(180deg,#f3fcf6 0%,#e7f7ec 24%,#d8f0df 54%,#b8dfc8 100%)}
+.s2{background:linear-gradient(180deg,#f0faf4 0%,#e0f3e6 28%,#cce9d5 58%,#b1dbbf 100%)}
+.s3{background:linear-gradient(180deg,#edf9f1 0%,#d9efdf 30%,#bee2cc 60%,#a5d3b6 100%)}
+.s4{background:linear-gradient(180deg,#e9f7ee 0%,#cde8d6 32%,#acdbbd 62%,#91cba9 100%)}
 
 /* ---------- water: white light on a light ground ---------- */
 .wl-a{mix-blend-mode:soft-light;opacity:1}
@@ -720,8 +720,23 @@ body.template-index{background:var(--ink)}
 .nav a::after{background:#b8701c}
 .ico:hover{background:rgba(75,58,143,.09)}
 .dot{background:#4b3a8f;color:#f4fdf6}
-.rail a{background:rgba(75,58,143,.24)}
-.rail a.on{background:#b8701c;box-shadow:0 0 0 5px rgba(201,118,29,.16)}
+.rail{right:10px;gap:12px}
+.rail a{display:block !important;background:rgba(75,58,143,.28)}
+.rail a.on{
+  width:18px;
+  height:30px;
+  margin-left:-5px;
+  border-radius:9px;
+  background:rgba(201,118,29,.18);
+  box-shadow:none;
+}
+.rail a.on::after{
+  content:"";
+  position:absolute;
+  inset:5px 6px;
+  border-radius:999px;
+  background:#b8701c;
+}
 
 /* ---------- badges, pills, rings ---------- */
 .badge .bi{background:rgba(255,255,255,.62);border:1px solid rgba(75,58,143,.16);color:#4f7d10}
