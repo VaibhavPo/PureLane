@@ -49,26 +49,26 @@
       {%- else -%}
         {%- comment -%}Fallback Reference Design Cards{%- endcomment -%}
         {%- for block in section.blocks -%}
-          {%- if block.type == 'product_card' -%}
+          {%- assign product = block.settings.product -%}
+          {%- if block.type == 'product_card' and product != blank -%}
             <article class="glass card rv {% if forloop.index == 2 %}rv-d1{% elsif forloop.index == 3 %}rv-d2{% elsif forloop.index == 4 %}rv-d3{% endif %}" {{ block.shopify_attributes }}>
               <div class="shot">
                 {%- if block.settings.badge_text != blank -%}
                   <span class="pill">{{ block.settings.badge_text }}</span>
                 {%- endif -%}
-                <span class="pimg {{ block.settings.image_class }}" role="img" aria-label="{{ block.settings.title }}"></span>
+                {%- if product.featured_image != blank -%}
+                  <img src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.title | escape }}" loading="lazy" style="max-height:160px;object-fit:contain;margin:0 auto">
+                {%- endif -%}
               </div>
-              <h4>{{ block.settings.title }}</h4>
+              <h4>{{ product.title }}</h4>
               <div class="rate"><b>★ {{ block.settings.rating }}</b> · {{ block.settings.review_count }} reviews</div>
               <div class="pr">
-                <strong>{{ block.settings.price }}</strong>
-                {%- if block.settings.compare_at_price != blank -%}
-                  <s>{{ block.settings.compare_at_price }}</s>
-                {%- endif -%}
-                {%- if block.settings.discount_tag != blank -%}
-                  <em>{{ block.settings.discount_tag }}</em>
+                <strong>{{ product.price | money }}</strong>
+                {%- if product.compare_at_price > product.price -%}
+                  <s>{{ product.compare_at_price | money }}</s>
                 {%- endif -%}
               </div>
-              <button class="btn btn-ghost btn-sm">Add to cart</button>
+              <form action="{{ routes.cart_add_url }}" method="post"><input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}"><button class="btn btn-ghost btn-sm" type="submit" {% unless product.available %}disabled{% endunless %}>{% if product.available %}Add to cart{% else %}Sold out{% endif %}</button></form>
             </article>
           {%- endif -%}
         {%- endfor -%}
@@ -112,8 +112,9 @@
   "blocks": [
     {
       "type": "product_card",
-      "name": "Fallback Product Card",
+      "name": "Shopify Product Card",
       "settings": [
+        { "type": "product", "id": "product", "label": "Shopify product" },
         {
           "type": "text",
           "id": "badge_text",

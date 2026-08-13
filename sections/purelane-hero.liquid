@@ -75,9 +75,11 @@
 
     <div class="hero-prod" id="heroProd">
       <div class="hstage" id="hstage">
+        {%- assign hero_slide_index = 0 -%}
         {%- for block in section.blocks -%}
           {%- if block.type == 'slide' -%}
-            <div class="hslide {% if forloop.first %}on{% endif %} hs{{ forloop.index }}" data-n="{{ forloop.index }}">
+            {%- assign hero_slide_index = hero_slide_index | plus: 1 -%}
+            <div class="hslide {% if hero_slide_index == 1 %}on{% endif %} hs{{ hero_slide_index }}" data-n="{{ hero_slide_index }}">
               {%- if block.settings.image_1_class != blank -%}
                 <span class="hp {{ block.settings.image_1_class }} a d1" role="img" aria-label="{{ block.settings.image_1_alt }}"></span>
               {%- endif -%}
@@ -105,9 +107,11 @@
         {%- endfor -%}
       </div>
       <div class="hdots" id="hdots">
+        {%- assign hero_dot_index = 0 -%}
         {%- for block in section.blocks -%}
           {%- if block.type == 'slide' -%}
-            <button type="button" class="{% if forloop.first %}on{% endif %}" aria-label="Show {{ block.settings.price_label }}"></button>
+            {%- assign hero_dot_index = hero_dot_index | plus: 1 -%}
+            <button type="button" class="{% if hero_dot_index == 1 %}on{% endif %}" aria-label="Show {{ block.settings.price_label }}"></button>
           {%- endif -%}
         {%- endfor -%}
       </div>
