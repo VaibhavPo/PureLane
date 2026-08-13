@@ -1,3 +1,6 @@
+Exit code: 0
+Wall time: 3.7 seconds
+Output:
 {% comment %}
   Renders a product card
 
@@ -170,40 +173,84 @@
 
               <span class="caption-large light">{{ block.settings.description | escape }}</span>
 
-              {%- if show_rating and card_product.metafields.reviews.rating.value != blank -%}
-                {% liquid
-                  assign rating_decimal = 0
-                  assign decimal = card_product.metafields.reviews.rating.value.rating | modulo: 1
-                  if decimal >= 0.3 and decimal <= 0.7
-                    assign rating_decimal = 0.5
-                  elsif decimal > 0.7
-                    assign rating_decimal = 1
+              {%- liquid
+                assign rating_val = nil
+                assign rating_count_val = nil
+                assign r_obj = card_product.metafields.custom.rating.value
+                if r_obj != blank
+                  if r_obj.rating != blank
+                    assign rating_val = r_obj.rating
+                  else
+                    assign r_str = r_obj | append: "" | strip
+                    if r_str contains ' out of '
+                      assign rating_val = r_str | split: ' out of ' | first
+                    else
+                      assign rating_val = r_str
+                    endif
                   endif
-                %}
-                <div
-                  class="rating"
-                  role="img"
-                  aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: card_product.metafields.reviews.rating.value, rating_max: card_product.metafields.reviews.rating.value.scale_max }}"
-                >
-                  <span
-                    aria-hidden="true"
-                    class="rating-star"
-                    style="--rating: {{ card_product.metafields.reviews.rating.value.rating | floor }}; --rating-max: {{ card_product.metafields.reviews.rating.value.scale_max }}; --rating-decimal: {{ rating_decimal }};"
-                  ></span>
+                endif
+                if rating_val == blank
+                  assign r_obj = card_product.metafields.custom.rating
+                  if r_obj != blank
+                    assign r_str = r_obj | append: "" | strip
+                    if r_str != '' and r_str != '0'
+                      if r_str contains ' out of '
+                        assign rating_val = r_str | split: ' out of ' | first
+                      else
+                        assign rating_val = r_str
+                      endif
+                    endif
+                  endif
+                endif
+                if rating_val == blank
+                  assign r_obj = card_product.metafields.reviews.rating.value
+                  if r_obj != blank
+                    if r_obj.rating != blank
+                      assign rating_val = r_obj.rating
+                    else
+                      assign r_str = r_obj | append: "" | strip
+                      if r_str contains ' out of '
+                        assign rating_val = r_str | split: ' out of ' | first
+                      else
+                        assign rating_val = r_str
+                      endif
+                    endif
+                  endif
+                endif
+                assign rc = card_product.metafields.custom.rating_count.value
+                if rc != blank
+                  assign rating_count_val = rc
+                endif
+                if rating_count_val == blank
+                  assign rc = card_product.metafields.custom.rating_count
+                  if rc != blank
+                    assign rc_str = rc | append: "" | strip
+                    if rc_str != '' and rc_str != '0'
+                      assign rating_count_val = rc_str
+                    endif
+                  endif
+                endif
+                if rating_count_val == blank
+                  assign rc = card_product.metafields.reviews.rating_count.value
+                  if rc != blank
+                    assign rating_count_val = rc
+                  endif
+                endif
+                if rating_count_val == blank
+                  assign rc = card_product.metafields.reviews.rating_count
+                  if rc != blank
+                    assign rc_str = rc | append: "" | strip
+                    if rc_str != '' and rc_str != '0'
+                      assign rating_count_val = rc_str
+                    endif
+                  endif
+                endif
+              -%}
+              {%- if show_rating and rating_val != blank -%}
+                <div class="rate" style="font-size:11.5px;color:var(--paper-2);margin-bottom:10px;display:flex;align-items:center;gap:5px;">
+                  <b>★ {{ rating_val }}</b>
+                  {%- if rating_count_val != blank -%}<span> · {{ rating_count_val }} reviews</span>{%- endif -%}
                 </div>
-                <p class="rating-text caption">
-                  <span aria-hidden="true">
-                    {{- card_product.metafields.reviews.rating.value }} /
-                    {{ card_product.metafields.reviews.rating.value.scale_max -}}
-                  </span>
-                </p>
-                <p class="rating-count caption">
-                  <span aria-hidden="true">({{ card_product.metafields.reviews.rating_count }})</span>
-                  <span class="visually-hidden">
-                    {{- card_product.metafields.reviews.rating_count }}
-                    {{ 'accessibility.total_reviews' | t -}}
-                  </span>
-                </p>
               {%- endif -%}
 
               {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
@@ -625,3 +672,5 @@
     </div>
   </div>
 {%- endif -%}
+
+

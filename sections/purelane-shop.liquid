@@ -1,5 +1,5 @@
 {%- comment -%}
-  Purelane Shop / Product Grid Section
+  Shopify product-picker grid
 {%- endcomment -%}
 
 <section class="sec" id="shop" data-scene="3" {{ section.shopify_attributes }}>
@@ -7,224 +7,128 @@
     <div class="panel-head rv">
       <span class="kicker">{{ section.settings.kicker }}</span>
       <h2 class="d2" style="margin-top:12px">{{ section.settings.heading }}</h2>
-      <div class="rule">
-        <i></i>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/>
-          <path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/>
-        </svg>
-        <i></i>
-      </div>
+      <div class="rule"><i></i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/><path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/></svg><i></i></div>
     </div>
 
     <div class="shelf">
-      {%- assign selected_collection = section.settings.collection -%}
-      {%- if selected_collection != blank and selected_collection.products_count > 0 -%}
-        {%- for product in selected_collection.products limit: section.settings.products_to_show -%}
-          <article class="glass card rv">
+      {%- for block in section.blocks -%}
+        {%- assign product = block.settings.product -%}
+        {%- if product != blank -%}
+          {%- liquid
+            assign rating_val = nil
+            assign rating_count_val = nil
+
+            # Try custom namespace (Shopify's default namespace for custom metafields)
+            assign r_obj = product.metafields.custom.rating
+            assign r_val = r_obj.value | default: r_obj
+            if r_val != blank
+              if r_val.rating != blank
+                assign rating_val = r_val.rating
+              else
+                assign r_str = r_val | append: "" | strip
+                if r_str contains ' out of '
+                  assign rating_val = r_str | split: ' out of ' | first
+                else
+                  assign rating_val = r_str
+                endif
+              endif
+            endif
+
+            assign rc_obj = product.metafields.custom.rating_count
+            assign rc_val = rc_obj.value | default: rc_obj
+            if rc_val != blank
+              assign rating_count_val = rc_val
+            endif
+
+            # Try reviews namespace fallback
+            if rating_val == blank
+              assign r_obj = product.metafields.reviews.rating
+              assign r_val = r_obj.value | default: r_obj
+              if r_val != blank
+                if r_val.rating != blank
+                  assign rating_val = r_val.rating
+                else
+                  assign r_str = r_val | append: "" | strip
+                  if r_str contains ' out of '
+                    assign rating_val = r_str | split: ' out of ' | first
+                  else
+                    assign rating_val = r_str
+                  endif
+                endif
+              endif
+            endif
+
+            if rating_count_val == blank
+              assign rc_obj = product.metafields.reviews.rating_count
+              assign rc_val = rc_obj.value | default: rc_obj
+              if rc_val != blank
+                assign rating_count_val = rc_val
+              endif
+            endif
+
+            # Try block settings fallback / override
+            if rating_val == blank or rating_val == '0' or rating_val == 0
+              assign rating_val = block.settings.rating
+            endif
+            if rating_count_val == blank or rating_count_val == '0' or rating_count_val == 0
+              assign rating_count_val = block.settings.review_count
+            endif
+
+            assign discount = product.compare_at_price | minus: product.price
+            assign image_alt = product.featured_image.alt | default: product.title
+            assign product_tag = product.tags.first
+          -%}
+          <article class="glass card rv {% if forloop.index == 2 %}rv-d1{% elsif forloop.index == 3 %}rv-d2{% elsif forloop.index == 4 %}rv-d3{% endif %}" {{ block.shopify_attributes }}>
             <div class="shot">
-              {%- if product.compare_at_price > product.price -%}
-                <span class="pill">Save {{ product.compare_at_price | minus: product.price | money }}</span>
-              {%- endif -%}
+              {%- if product_tag != blank -%}<span class="pill">{{ product_tag }}</span>{%- endif -%}
               {%- if product.featured_image != blank -%}
-                <img src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.title | escape }}" loading="lazy" style="max-height:160px;object-fit:contain;margin:0 auto">
+                {{ product.featured_image | image_url: width: 500 | image_tag: alt: image_alt, loading: 'lazy' }}
               {%- else -%}
-                <span class="pimg p-tap" role="img"></span>
+                <span class="pimg p-tap" role="img" aria-label="{{ product.title | escape }}"></span>
               {%- endif -%}
             </div>
             <h4>{{ product.title }}</h4>
-            <div class="rate"><b>★ 4.8</b> · 200+ reviews</div>
+            {%- if rating_val != blank or rating_count_val != blank -%}
+              <div class="rate">
+                {%- if rating_val != blank -%}
+                  <b>★ {{ rating_val }}</b>
+                {%- endif -%}
+                {%- if rating_count_val != blank -%}
+                  <span> · {{ rating_count_val }} reviews</span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
             <div class="pr">
-              <strong>{{ product.price | money }}</strong>
-              {%- if product.compare_at_price > product.price -%}
-                <s>{{ product.compare_at_price | money }}</s>
-              {%- endif -%}
+              <strong>{{ product.price | money_without_trailing_zeros }}</strong>
+              {%- if product.compare_at_price > product.price -%}<s>{{ product.compare_at_price | money_without_trailing_zeros }}</s><em>{{ discount | times: 100.0 | divided_by: product.compare_at_price | round }}% off</em>{%- endif -%}
             </div>
             <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
               <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-              <button class="btn btn-ghost btn-sm" type="submit">Add to cart</button>
+              <button class="btn btn-ghost btn-sm" type="submit" {% unless product.available %}disabled{% endunless %}>{% if product.available %}Add to cart{% else %}Sold out{% endif %}</button>
             </form>
           </article>
-        {%- endfor -%}
-      {%- else -%}
-        {%- comment -%}Fallback Reference Design Cards{%- endcomment -%}
-        {%- for block in section.blocks -%}
-          {%- assign product = block.settings.product -%}
-          {%- if block.type == 'product_card' and product != blank -%}
-            <article class="glass card rv {% if forloop.index == 2 %}rv-d1{% elsif forloop.index == 3 %}rv-d2{% elsif forloop.index == 4 %}rv-d3{% endif %}" {{ block.shopify_attributes }}>
-              <div class="shot">
-                {%- if block.settings.badge_text != blank -%}
-                  <span class="pill">{{ block.settings.badge_text }}</span>
-                {%- endif -%}
-                {%- if product.featured_image != blank -%}
-                  <img src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.title | escape }}" loading="lazy" style="max-height:160px;object-fit:contain;margin:0 auto">
-                {%- endif -%}
-              </div>
-              <h4>{{ product.title }}</h4>
-              <div class="rate"><b>★ {{ block.settings.rating }}</b> · {{ block.settings.review_count }} reviews</div>
-              <div class="pr">
-                <strong>{{ product.price | money }}</strong>
-                {%- if product.compare_at_price > product.price -%}
-                  <s>{{ product.compare_at_price | money }}</s>
-                {%- endif -%}
-              </div>
-              <form action="{{ routes.cart_add_url }}" method="post"><input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}"><button class="btn btn-ghost btn-sm" type="submit" {% unless product.available %}disabled{% endunless %}>{% if product.available %}Add to cart{% else %}Sold out{% endif %}</button></form>
-            </article>
-          {%- endif -%}
-        {%- endfor -%}
-      {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
     </div>
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "Purelane Shop Grid",
+  "name": "Purelane Product Grid",
   "settings": [
-    {
-      "type": "text",
-      "id": "kicker",
-      "label": "Kicker",
-      "default": "Bestsellers"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Loved by 30,000 homes"
-    },
-    {
-      "type": "collection",
-      "id": "collection",
-      "label": "Shopify Collection (Optional)",
-      "info": "If selected, pulls live products from Shopify. Leave blank to use reference fallback cards."
-    },
-    {
-      "type": "range",
-      "id": "products_to_show",
-      "label": "Live Products to show",
-      "min": 4,
-      "max": 12,
-      "step": 1,
-      "default": 8
-    }
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Bestsellers" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Loved by 30,000 homes" }
   ],
-  "blocks": [
-    {
-      "type": "product_card",
-      "name": "Shopify Product Card",
-      "settings": [
-        { "type": "product", "id": "product", "label": "Shopify product" },
-        {
-          "type": "text",
-          "id": "badge_text",
-          "label": "Badge Text",
-          "default": "Best seller"
-        },
-        {
-          "type": "text",
-          "id": "image_class",
-          "label": "Image CSS Class",
-          "info": "Choose from: p-tap, p-kitchen, p-metal, p-wm, p-laundry, p-toilet, p-floor, p-dish",
-          "default": "p-tap"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Product Title",
-          "default": "Tap cleaner & limescale remover"
-        },
-        {
-          "type": "text",
-          "id": "rating",
-          "label": "Rating",
-          "default": "4.8"
-        },
-        {
-          "type": "text",
-          "id": "review_count",
-          "label": "Review Count",
-          "default": "237"
-        },
-        {
-          "type": "text",
-          "id": "price",
-          "label": "Price",
-          "default": "₹200"
-        },
-        {
-          "type": "text",
-          "id": "compare_at_price",
-          "label": "Compare at Price",
-          "default": "₹299"
-        },
-        {
-          "type": "text",
-          "id": "discount_tag",
-          "label": "Discount Tag",
-          "default": "33% off"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Purelane Shop Grid",
-      "blocks": [
-        {
-          "type": "product_card",
-          "settings": {
-            "badge_text": "Best seller",
-            "image_class": "p-tap",
-            "title": "Tap cleaner & limescale remover",
-            "rating": "4.8",
-            "review_count": "237",
-            "price": "₹200",
-            "compare_at_price": "₹299",
-            "discount_tag": "33% off"
-          }
-        },
-        {
-          "type": "product_card",
-          "settings": {
-            "badge_text": "Best seller",
-            "image_class": "p-kitchen",
-            "title": "Kitchen cleaner, foaming",
-            "rating": "4.8",
-            "review_count": "254",
-            "price": "₹200",
-            "compare_at_price": "₹299",
-            "discount_tag": "33% off"
-          }
-        },
-        {
-          "type": "product_card",
-          "settings": {
-            "badge_text": "Top rated",
-            "image_class": "p-metal",
-            "title": "Copper, bronze & brass cleaner",
-            "rating": "4.8",
-            "review_count": "231",
-            "price": "₹200",
-            "compare_at_price": "₹299",
-            "discount_tag": "33% off"
-          }
-        },
-        {
-          "type": "product_card",
-          "settings": {
-            "badge_text": "New",
-            "image_class": "p-wm",
-            "title": "Washing machine cleaner & descaler",
-            "rating": "4.8",
-            "review_count": "183",
-            "price": "₹200",
-            "compare_at_price": "₹299",
-            "discount_tag": "33% off"
-          }
-        }
-      ]
-    }
-  ]
+  "blocks": [{
+    "type": "product_card",
+    "name": "Shopify product",
+    "settings": [
+      { "type": "product", "id": "product", "label": "Product" },
+      { "type": "text", "id": "rating", "label": "Fallback Rating (e.g. 4.8)" },
+      { "type": "text", "id": "review_count", "label": "Fallback Review Count (e.g. 237)" }
+    ]
+  }],
+  "presets": [{ "name": "Purelane Product Grid", "blocks": [{ "type": "product_card" }, { "type": "product_card" }, { "type": "product_card" }, { "type": "product_card" }] }]
 }
 {% endschema %}

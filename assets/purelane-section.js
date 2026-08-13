@@ -169,4 +169,3 @@
   }
   document.addEventListener('shopify:section:load', init);
 })();
-

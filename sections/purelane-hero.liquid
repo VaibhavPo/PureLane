@@ -80,13 +80,19 @@
           {%- if block.type == 'slide' -%}
             {%- assign hero_slide_index = hero_slide_index | plus: 1 -%}
             <div class="hslide {% if hero_slide_index == 1 %}on{% endif %} hs{{ hero_slide_index }}" data-n="{{ hero_slide_index }}">
-              {%- if block.settings.image_1_class != blank -%}
+              {%- if block.settings.image_1 != blank -%}
+                {{ block.settings.image_1 | image_url: width: 1000 | image_tag: class: 'hp a d1', loading: 'eager', alt: block.settings.image_1_alt }}
+              {%- elsif block.settings.image_1_class != blank -%}
                 <span class="hp {{ block.settings.image_1_class }} a d1" role="img" aria-label="{{ block.settings.image_1_alt }}"></span>
               {%- endif -%}
-              {%- if block.settings.image_2_class != blank -%}
+              {%- if block.settings.image_2 != blank -%}
+                {{ block.settings.image_2 | image_url: width: 1000 | image_tag: class: 'hp b d2', loading: 'lazy', alt: block.settings.image_2_alt }}
+              {%- elsif block.settings.image_2_class != blank -%}
                 <span class="hp {{ block.settings.image_2_class }} b d2" role="img" aria-label="{{ block.settings.image_2_alt }}"></span>
               {%- endif -%}
-              {%- if block.settings.image_3_class != blank -%}
+              {%- if block.settings.image_3 != blank -%}
+                {{ block.settings.image_3 | image_url: width: 1000 | image_tag: class: 'hp c d3', loading: 'lazy', alt: block.settings.image_3_alt }}
+              {%- elsif block.settings.image_3_class != blank -%}
                 <span class="hp {{ block.settings.image_3_class }} c d3" role="img" aria-label="{{ block.settings.image_3_alt }}"></span>
               {%- endif -%}
 
@@ -195,9 +201,15 @@
           "content": "Image 1 (Left/Back)"
         },
         {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Image 1 upload",
+          "info": "Optional. A selected image replaces the CSS illustration below."
+        },
+        {
           "type": "text",
           "id": "image_1_class",
-          "label": "Image 1 CSS Class",
+          "label": "Image 1 CSS Class (fallback)",
           "info": "Choose from: p-kbtl, p-tbtl, p-mbtl, p-dish, p-floor, p-tap, p-toilet, p-wm",
           "default": "p-kbtl"
         },
@@ -212,9 +224,15 @@
           "content": "Image 2 (Center/Front)"
         },
         {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Image 2 upload",
+          "info": "Optional. A selected image replaces the CSS illustration below."
+        },
+        {
           "type": "text",
           "id": "image_2_class",
-          "label": "Image 2 CSS Class",
+          "label": "Image 2 CSS Class (fallback)",
           "info": "Leave blank for single product slide"
         },
         {
@@ -227,9 +245,15 @@
           "content": "Image 3 (Right/Mid)"
         },
         {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Image 3 upload",
+          "info": "Optional. A selected image replaces the CSS illustration below."
+        },
+        {
           "type": "text",
           "id": "image_3_class",
-          "label": "Image 3 CSS Class",
+          "label": "Image 3 CSS Class (fallback)",
           "info": "Leave blank for 1 or 2 product slides"
         },
         {

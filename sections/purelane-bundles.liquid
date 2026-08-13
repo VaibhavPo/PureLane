@@ -1,3 +1,6 @@
+Exit code: 0
+Wall time: 2.7 seconds
+Output:
 {%- comment -%}
   Purelane Bundles Section
 {%- endcomment -%}
@@ -76,14 +79,17 @@
               {%- endif -%}
             </ul>
 
-            <a class="btn {% if block.settings.is_featured %}btn-primary{% else %}btn-ghost{% endif %}" href="{{ block.settings.button_link | default: '#shop' }}">
+            <button
+              class="btn {% if block.settings.is_featured %}btn-primary{% else %}btn-ghost{% endif %}"
+              data-build-box="{{ block.settings.quantity | default: '3' }}"
+              type="button">
               {{ block.settings.button_text }}
               {%- if block.settings.is_featured -%}
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M5 12h13m-5-6 6 6-6 6"/>
                 </svg>
               {%- endif -%}
-            </a>
+            </button>
           </article>
         {%- endif -%}
       {%- endfor -%}
@@ -279,3 +285,4 @@
   ]
 }
 {% endschema %}
+
