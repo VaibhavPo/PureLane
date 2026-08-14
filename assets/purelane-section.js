@@ -363,6 +363,43 @@
       revs.forEach(function (el) { el.classList.add('in'); });
     }
 
+    /* ---------- horizontal combo rail controls ---------- */
+    document.querySelectorAll('.comborail').forEach(function (rail) {
+      var shell = rail.closest('.combo-rail');
+      if (!shell) return;
+      var prev = shell.querySelector('.combo-prev');
+      var next = shell.querySelector('.combo-next');
+      var step = Math.max(rail.clientWidth * 0.82, 260);
+
+      function moveCombo(direction) {
+        rail.scrollBy({
+          left: direction * step,
+          behavior: reduce ? 'auto' : 'smooth'
+        });
+      }
+
+      if (prev) prev.addEventListener('click', function () { moveCombo(-1); });
+      if (next) next.addEventListener('click', function () { moveCombo(1); });
+
+      rail.addEventListener('wheel', function (event) {
+        if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+          event.preventDefault();
+          rail.scrollLeft += event.deltaY;
+        }
+      }, { passive: false });
+
+      rail.addEventListener('keydown', function (event) {
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          moveCombo(1);
+        }
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          moveCombo(-1);
+        }
+      });
+    });
+
     /* ---------- hero stage: 1 -> 2 -> 3 products ---------- */
     if (hstage) {
       var hs = [].slice.call(hstage.querySelectorAll('.hslide'));

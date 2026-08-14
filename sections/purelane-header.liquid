@@ -75,7 +75,7 @@
         <span class="dot">{{ cart.item_count }}</span>
       </a>
 
-      <button class="ico burger" aria-label="Menu" onclick="document.querySelector('.nav').classList.toggle('active')">
+      <button class="ico burger" aria-label="Menu" id="menu-toggle">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
           <path d="M4 8h16M4 16h16"/>
         </svg>
@@ -97,6 +97,10 @@
 <style>
 /* Mobile active menu tweak */
 @media(max-width: 1023px) {
+  .nav {
+    display: none;
+  }
+
   .nav.active {
     display: flex !important;
     position: absolute;
@@ -115,6 +119,27 @@
   }
 }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const menuToggle = document.getElementById('menu-toggle');
+  const nav = document.querySelector('.nav');
+
+  if (menuToggle && nav) {
+    menuToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      nav.classList.toggle('active');
+    });
+
+    // Close menu when a link is clicked
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function() {
+        nav.classList.remove('active');
+      });
+    });
+  }
+});
+</script>
 
 {% schema %}
 {

@@ -9,11 +9,16 @@
       <p class="lede" style="margin:14px auto 0">{{ section.settings.subheading }}</p>
     </div>
 
-    <div class="comborail rv">
-      {%- for block in section.blocks -%}
-        {%- assign product_1 = block.settings.product_1 -%}
-        {%- assign product_2 = block.settings.product_2 -%}
-        {%- assign product_3 = block.settings.product_3 -%}
+    <div class="combo-rail rv">
+      <div class="combo-rail-controls" aria-label="Scroll combo cards">
+        <button class="combo-scroll-btn combo-prev" type="button" aria-label="Scroll left">Prev</button>
+        <button class="combo-scroll-btn combo-next" type="button" aria-label="Scroll right">Next</button>
+      </div>
+      <div class="comborail" tabindex="0" aria-label="Best selling combo cards slider">
+        {%- for block in section.blocks -%}
+          {%- assign product_1 = block.settings.product_1 -%}
+          {%- assign product_2 = block.settings.product_2 -%}
+          {%- assign product_3 = block.settings.product_3 -%}
         {%- assign regular_price = 0 -%}
         {%- assign product_count = 0 -%}
         {%- if product_1 != blank -%}{%- assign regular_price = regular_price | plus: product_1.price -%}{%- assign product_count = product_count | plus: 1 -%}{%- endif -%}
@@ -43,6 +48,7 @@
           </article>
         {%- endif -%}
       {%- endfor -%}
+      </div>
     </div>
     <div class="swipecue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13m-5-6 6 6-6 6"/></svg>Swipe for more combos</div>
     <p class="railnote">{{ section.settings.rail_note }}</p>

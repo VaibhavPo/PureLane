@@ -2599,7 +2599,8 @@ details[open] .header__icon-close {
 }
 
 /* Search */
-menu-drawer + .header__search {
+menu-drawer + .header__search,
+header-drawer + .header__search {
   display: none;
 }
 

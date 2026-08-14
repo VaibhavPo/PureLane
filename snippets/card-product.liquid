@@ -110,6 +110,12 @@ Output:
                 {%- endif -%}
               </div>
             </div>
+          {%- else -%}
+            <div class="card__media{% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}" style="background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; min-height: 300px;">
+              <div class="media media--transparent">
+                <p style="color: #999; font-size: 14px; text-align: center;">{{ 'products.product.no_image' | t | default: 'No image available' }}</p>
+              </div>
+            </div>
           {%- endif -%}
           <div class="card__content">
             <div class="card__information">

@@ -511,9 +511,19 @@ footer{position:relative;z-index:2;margin-top:var(--sec-y);padding:44px 0 30px;b
 .proof-stats{margin-top:20px}
 
 /* ---------- BEST SELLING COMBOS ---------- */
+.combo-rail{display:flex;flex-direction:column;gap:10px}
+.combo-rail-controls{display:flex;justify-content:flex-end;gap:8px;margin:0 2px 2px}
+.combo-scroll-btn{display:inline-flex;align-items:center;justify-content:center;height:34px;padding:0 14px;border-radius:999px;
+  background:rgba(236,230,247,.10);border:1px solid rgba(236,230,247,.22);color:var(--surface);font-size:10.5px;font-weight:800;
+  letter-spacing:.12em;text-transform:uppercase;transition:.25s var(--ease)}
+.combo-scroll-btn:hover{background:rgba(236,230,247,.16);transform:translateY(-1px)}
 .comborail{display:flex;gap:14px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
-  margin:0 -18px;padding:4px 18px 14px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.comborail::-webkit-scrollbar{display:none}
+  margin:0 -18px;padding:4px 18px 14px;scrollbar-width:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;
+  touch-action:pan-x;cursor:grab}
+.comborail:active{cursor:grabbing}
+.comborail::-webkit-scrollbar{height:8px}
+.comborail::-webkit-scrollbar-track{background:rgba(236,230,247,.08);border-radius:999px}
+.comborail::-webkit-scrollbar-thumb{background:rgba(240,160,60,.5);border-radius:999px}
 .combo{flex:0 0 302px;scroll-snap-align:start;display:flex;flex-direction:column;padding:0;transition:.4s var(--ease)}
 .combo:hover{transform:translateY(-5px)}
 .combo.hero-combo{border-color:rgba(240,160,60,.42);box-shadow:0 26px 74px rgba(18,12,34,.44),0 0 0 1px rgba(240,160,60,.2),var(--g-inset)}
@@ -587,6 +597,7 @@ footer{position:relative;z-index:2;margin-top:var(--sec-y);padding:44px 0 30px;b
   .rot .frame{height:172px}
   .rot .frame .pimg{height:164px}
   .combo{flex:0 0 268px}
+  .combo-scroll-btn{height:32px;padding:0 12px;font-size:9.5px;letter-spacing:.1em}
   .stack .it .pimg{height:56px}
   .stack .it .tile{height:56px;width:38px}
   .cat .ph{height:158px}

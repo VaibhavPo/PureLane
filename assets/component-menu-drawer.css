@@ -3,7 +3,9 @@
 }
 
 .js menu-drawer > details > summary::before,
-.js menu-drawer > details[open]:not(.menu-opening) > summary::before {
+.js header-drawer > details > summary::before,
+.js menu-drawer > details[open]:not(.menu-opening) > summary::before,
+.js header-drawer > details[open]:not(.menu-opening) > summary::before {
   content: '';
   position: absolute;
   cursor: default;
@@ -19,7 +21,8 @@
   transition: opacity 0s, visibility 0s;
 }
 
-menu-drawer > details[open] > summary::before {
+menu-drawer > details[open] > summary::before,
+header-drawer > details[open] > summary::before {
   visibility: visible;
   opacity: 1;
   transition: opacity var(--duration-default) ease, visibility var(--duration-default) ease;
