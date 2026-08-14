@@ -1,5 +1,5 @@
 {%- comment -%}
-  Purelane Full Range Section
+  Purelane Full Range Section - Dynamically loads products by 
 {%- endcomment -%}
 
 <section class="sec" id="range" data-scene="3" {{ section.shopify_attributes }}>
@@ -15,11 +15,33 @@
 
       <div class="stripwrap">
         <div class="rangerow">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'range_item' -%}
-              <span class="pimg {{ block.settings.image_class }}" role="img" aria-label="{{ block.settings.title }}" {{ block.shopify_attributes }}></span>
-            {%- endif -%}
-          {%- endfor -%}
+          {%- assign collection_handle = section.settings.collection_handle -%}
+          {%- assign selected_collection = collections[collection_handle] -%}
+          
+          {%- if selected_collection != blank -%}
+            {%- for product in selected_collection.products -%}
+              {%- assign position = product.metafields.custom.shelf_position | default: 'default' -%}
+              <a href="{{ product.url }}" class="pimg-wrap pimg-{{ position }}" data-product-id="{{ product.id }}" data-position="{{ position }}">
+                {%- if product.featured_image -%}
+                  <img 
+                    src="{{ product.featured_image | image_url: width: 300 }}" 
+                    alt="{{ product.featured_image.alt | default: product.title }}"
+                    class="pimg-product"
+                    loading="lazy"
+                  >
+                {%- else -%}
+                  <div class="pimg-placeholder">{{ product.title }}</div>
+                {%- endif -%}
+              </a>
+            {%- endfor -%}
+          {%- else -%}
+            {%- comment -%} Fallback to blocks if no collection is set {%- endcomment -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'range_item' -%}
+                <span class="pimg {{ block.settings.image_class }}" role="img" aria-label="{{ block.settings.title }}" {{ block.shopify_attributes }}></span>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
         </div>
       </div>
       <p class="striphint">{{ section.settings.hint_text }}</p>
@@ -54,6 +76,16 @@
       "id": "hint_text",
       "label": "Swipe Hint Text",
       "default": "Swipe to see the full shelf"
+    },
+    {
+      "type": "text",
+      "id": "collection_handle",
+      "label": "Collection Handle",
+      "info": "Enter the collection's handle (URL slug). Example: 'all-products' or 'one-shelf'."
+    },
+    {
+      "type": "paragraph",
+      "content": "**INDIVIDUAL PRODUCT POSITIONING** — Add a metafield to each product to control its position:\n\n**Metafield Setup:**\n- Namespace: `custom`\n- Key: `shelf_position`\n- Type: Single line text\n- Values: `top`, `middle`, `bottom` (default: alternating heights)\n\n**Example:**\n- Product A: shelf_position = `top`\n- Product B: shelf_position = `middle`\n- Product C: shelf_position = `bottom`\n\nProducts without this metafield alternate between top/middle/bottom automatically for visual balance."
     }
   ],
   "blocks": [
@@ -95,3 +127,91 @@
   ]
 }
 {% endschema %}
+
+<style>
+.pimg-wrap {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex: 0 0 auto;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.pimg-wrap:hover {
+  transform: scale(1.05);
+}
+
+.pimg-product {
+  display: block;
+  max-height: 132px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 18px rgba(1, 24, 22, 0.5));
+}
+
+.pimg-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  background: #f0f0f0;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+  padding: 8px;
+}
+
+@media (max-width: 749px) {
+  .pimg-product {
+    max-height: 116px;
+  }
+}
+
+.striphint {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+}
+
+/* Position-based styling */
+.pimg-wrap.pimg-default:nth-child(odd) {
+  align-self: flex-end;
+}
+
+.pimg-wrap.pimg-default:nth-child(even) {
+  align-self: flex-end;
+}
+
+.pimg-wrap.pimg-default:nth-child(even) .pimg-product {
+  max-height: 118px;
+}
+
+/* Top position */
+.pimg-wrap.pimg-top {
+  align-self: flex-start;
+}
+
+/* Middle position */
+.pimg-wrap.pimg-middle {
+  align-self: center;
+}
+
+/* Bottom position */
+.pimg-wrap.pimg-bottom {
+  align-self: flex-end;
+}
+
+@media (max-width: 749px) {
+  .pimg-wrap.pimg-default:nth-child(even) .pimg-product {
+    max-height: 104px;
+  }
+}
+</style>
