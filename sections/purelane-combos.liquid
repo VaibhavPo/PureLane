@@ -19,35 +19,35 @@
           {%- assign product_1 = block.settings.product_1 -%}
           {%- assign product_2 = block.settings.product_2 -%}
           {%- assign product_3 = block.settings.product_3 -%}
-        {%- assign regular_price = 0 -%}
-        {%- assign product_count = 0 -%}
-        {%- if product_1 != blank -%}{%- assign regular_price = regular_price | plus: product_1.price -%}{%- assign product_count = product_count | plus: 1 -%}{%- endif -%}
-        {%- if product_2 != blank -%}{%- assign regular_price = regular_price | plus: product_2.price -%}{%- assign product_count = product_count | plus: 1 -%}{%- endif -%}
-        {%- if product_3 != blank -%}{%- assign regular_price = regular_price | plus: product_3.price -%}{%- assign product_count = product_count | plus: 1 -%}{%- endif -%}
-        {%- assign special_price_cents = block.settings.special_price | times: 100 -%}
-        {%- assign savings = regular_price | minus: special_price_cents -%}
-        {%- if product_count > 0 -%}
-          <article class="glass combo {% if block.settings.is_featured %}hero-combo{% endif %}" {{ block.shopify_attributes }}>
-            <div class="tray">
-              {%- if block.settings.savings_tag != blank -%}<span class="save">{{ block.settings.savings_tag }}{% if savings > 0 %} {{ savings | money_without_trailing_zeros }}{% endif %}</span>{%- endif -%}
-              {%- if block.settings.badge_text != blank -%}<span class="flag">{{ block.settings.badge_text }}</span>{%- endif -%}
-              <div class="stack">
-                {%- if product_1 != blank -%}<span class="it">{%- if product_1.featured_image != blank -%}<img class="pimg" src="{{ product_1.featured_image | image_url: width: 200 }}" alt="{{ product_1.title | escape }}" loading="lazy">{%- endif -%}<span>{{ product_1.title }}</span></span>{%- endif -%}
-                {%- if product_2 != blank -%}<span class="plus" aria-hidden="true">+</span><span class="it">{%- if product_2.featured_image != blank -%}<img class="pimg" src="{{ product_2.featured_image | image_url: width: 200 }}" alt="{{ product_2.title | escape }}" loading="lazy">{%- endif -%}<span>{{ product_2.title }}</span></span>{%- endif -%}
-                {%- if product_3 != blank -%}<span class="plus" aria-hidden="true">+</span><span class="it">{%- if product_3.featured_image != blank -%}<img class="pimg" src="{{ product_3.featured_image | image_url: width: 200 }}" alt="{{ product_3.title | escape }}" loading="lazy">{%- endif -%}<span>{{ product_3.title }}</span></span>{%- endif -%}
+          {%- assign regular_price = 0 -%}
+          {%- assign product_count = 0 -%}
+          {%- if product_1 != blank -%}{%- assign regular_price = regular_price | plus: product_1.price -%}{%- assign product_count = product_count | plus: 1 -%}{%- endif -%}
+          {%- if product_2 != blank -%}{%- assign regular_price = regular_price | plus: product_2.price -%}{%- assign product_count = product_count | plus: 1 -%}{%- endif -%}
+          {%- if product_3 != blank -%}{%- assign regular_price = regular_price | plus: product_3.price -%}{%- assign product_count = product_count | plus: 1 -%}{%- endif -%}
+          {%- assign special_price_cents = block.settings.special_price | times: 100 -%}
+          {%- assign savings = regular_price | minus: special_price_cents -%}
+          {%- if product_count > 0 -%}
+            <article class="glass combo {% if block.settings.is_featured %}hero-combo{% endif %}" {{ block.shopify_attributes }}>
+              <div class="tray">
+                {%- if block.settings.savings_tag != blank -%}<span class="save">{{ block.settings.savings_tag }}{% if savings > 0 %} {{ savings | money_without_trailing_zeros }}{% endif %}</span>{%- endif -%}
+                {%- if block.settings.badge_text != blank -%}<span class="flag">{{ block.settings.badge_text }}</span>{%- endif -%}
+                <div class="stack">
+                  {%- if product_1 != blank -%}<span class="it">{%- if product_1.featured_image != blank -%}<img class="pimg" src="{{ product_1.featured_image | image_url: width: 200 }}" alt="{{ product_1.title | escape }}" loading="lazy">{%- else -%}<div class="pimg-placeholder">{{ product_1.title }}</div>{%- endif -%}<span>{{ product_1.title }}</span></span>{%- endif -%}
+                  {%- if product_2 != blank -%}<span class="plus" aria-hidden="true">+</span><span class="it">{%- if product_2.featured_image != blank -%}<img class="pimg" src="{{ product_2.featured_image | image_url: width: 200 }}" alt="{{ product_2.title | escape }}" loading="lazy">{%- else -%}<div class="pimg-placeholder">{{ product_2.title }}</div>{%- endif -%}<span>{{ product_2.title }}</span></span>{%- endif -%}
+                  {%- if product_3 != blank -%}<span class="plus" aria-hidden="true">+</span><span class="it">{%- if product_3.featured_image != blank -%}<img class="pimg" src="{{ product_3.featured_image | image_url: width: 200 }}" alt="{{ product_3.title | escape }}" loading="lazy">{%- else -%}<div class="pimg-placeholder">{{ product_3.title }}</div>{%- endif -%}<span>{{ product_3.title }}</span></span>{%- endif -%}
+                </div>
               </div>
-            </div>
-            <div class="body">
-              <h3>{{ block.settings.title }}</h3>
-              <div class="cnt">{{ product_count }} products</div>
-              {%- if block.settings.description != blank -%}<p class="inc">{{ block.settings.description }}</p>{%- endif -%}
-              <div class="prow"><strong>{{ special_price_cents | money_without_trailing_zeros }}</strong><s>{{ regular_price | money_without_trailing_zeros }}</s>{%- if savings > 0 -%}<em>Save {{ savings | money_without_trailing_zeros }}</em>{%- endif -%}</div>
-              {%- if block.settings.fine_print != blank -%}<div class="fine">{{ block.settings.fine_print }}</div>{%- endif -%}
-              <a class="btn {% if block.settings.is_featured %}btn-primary{% else %}btn-ghost{% endif %}" href="{{ block.settings.button_link | default: '#bundles' }}">{{ block.settings.button_text }}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13m-5-6 6 6-6 6"/></svg></a>
-            </div>
-          </article>
-        {%- endif -%}
-      {%- endfor -%}
+              <div class="body">
+                <h3>{{ block.settings.title }}</h3>
+                <div class="cnt">{{ product_count }} products</div>
+                {%- if block.settings.description != blank -%}<p class="inc">{{ block.settings.description }}</p>{%- endif -%}
+                <div class="prow"><strong>{{ special_price_cents | money_without_trailing_zeros }}</strong><s>{{ regular_price | money_without_trailing_zeros }}</s>{%- if savings > 0 -%}<em>Save {{ savings | money_without_trailing_zeros }}</em>{%- endif -%}</div>
+                {%- if block.settings.fine_print != blank -%}<div class="fine">{{ block.settings.fine_print }}</div>{%- endif -%}
+                <a class="btn {% if block.settings.is_featured %}btn-primary{% else %}btn-ghost{% endif %}" href="{{ block.settings.button_link | default: '#bundles' }}">{{ block.settings.button_text }}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13m-5-6 6 6-6 6"/></svg></a>
+              </div>
+            </article>
+          {%- endif -%}
+        {%- endfor -%}
       </div>
     </div>
     <div class="swipecue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13m-5-6 6 6-6 6"/></svg>Swipe for more combos</div>
